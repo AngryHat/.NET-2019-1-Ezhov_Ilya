@@ -1,0 +1,7 @@
+C:\Users\Elijah\Desktop\EPAM .NET\Задания\Ezhvo_Ilya_Task02\Task3\obj\Debug\Task3.csprojAssemblyReference.cache
+C:\Users\Elijah\Desktop\EPAM .NET\Задания\Ezhvo_Ilya_Task02\Task3\obj\Debug\Task3.csproj.CoreCompileInputs.cache
+C:\Users\Elijah\Desktop\EPAM .NET\Задания\Ezhvo_Ilya_Task02\Task3\bin\Debug\Task3.exe.config
+C:\Users\Elijah\Desktop\EPAM .NET\Задания\Ezhvo_Ilya_Task02\Task3\bin\Debug\Task3.exe
+C:\Users\Elijah\Desktop\EPAM .NET\Задания\Ezhvo_Ilya_Task02\Task3\bin\Debug\Task3.pdb
+C:\Users\Elijah\Desktop\EPAM .NET\Задания\Ezhvo_Ilya_Task02\Task3\obj\Debug\Task3.exe
+C:\Users\Elijah\Desktop\EPAM .NET\Задания\Ezhvo_Ilya_Task02\Task3\obj\Debug\Task3.pdb
