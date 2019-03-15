@@ -12,7 +12,7 @@ namespace Task5
         static void Main(string[] args)
         {
             Console.WriteLine("This program replaces all HTML tags with '_' chars. \n");
-            string pattern = @"<\/?[a-z][a-z0-9]*[^<>]*>|<!--.*?-->";
+            string pattern = @"<.*?>";
             //string input = @"<b>Это</b> текст <i>с</i> <font color=”red”>HTML</font> кодами";
             Console.WriteLine("Please enter your HTML code:");
             string input = Console.ReadLine();
@@ -22,7 +22,7 @@ namespace Task5
 
             foreach (Match m in Regex.Matches(input, pattern, options))
             {
-                result = result.Replace(m.Value, "");
+                result = result.Replace(m.Value, "_");
             }
             Console.WriteLine(result);
 
