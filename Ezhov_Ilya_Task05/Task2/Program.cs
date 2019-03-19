@@ -40,7 +40,7 @@ namespace Task2
         {
             Сircumference = 2 * Math.PI * Radius;
         }
-        public void GetCircleInfo()
+        public void ShowInfo()
         {
             if (Radius > 0)
             {
@@ -70,7 +70,7 @@ namespace Task2
             round.Radius = double.Parse(Console.ReadLine());
             round.GetCircumference();
             round.GetRoundArea();
-            round.GetCircleInfo();
+            round.ShowInfo();
 
             Console.WriteLine("\n\nEnd of program. Press any key.");
             Console.ReadKey();
