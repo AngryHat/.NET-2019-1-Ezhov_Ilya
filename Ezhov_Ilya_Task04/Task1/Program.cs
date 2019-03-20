@@ -17,7 +17,7 @@ namespace Task1
             string[] separatedString = SeparateString(inputString, separatingChars);
             double averageLength = CalcAverageLength(separatedString);
             Console.WriteLine($"\nAverage length of words in entered text is: {averageLength:0.##} chars.");
-
+            
             Console.WriteLine("\n\n\nEnd of program. Press any key.");
             Console.ReadKey();
         }

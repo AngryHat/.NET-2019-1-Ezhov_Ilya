@@ -23,6 +23,7 @@ namespace Task4
         {
             int length = str1.Value.Length + str2.Value.Length;
             char[] result = new char[length];
+           
             for (int i = 0; i < str1.Value.Length; i++)
             {
                 result[i] = str1.Value[i];

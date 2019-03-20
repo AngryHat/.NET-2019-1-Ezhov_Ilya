@@ -12,30 +12,37 @@ namespace Task1
         public string LastName;
         public string PatronymicName;
         public DateTime BirthDate;
-        public int Age;
 
-        public void CreateUserFromConsole()
-        {
-            Console.Write("Enter first name of new user: ");
-            FirstName = Console.ReadLine();
-            Console.Write("Enter second name of new user: ");
-            LastName = Console.ReadLine();
-            Console.Write("Enter patronymic name of new user: ");
-            PatronymicName = Console.ReadLine();
-            Console.Write("Enter year of birth of new user: ");
-            int birthDateYear = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter month of birth of new user: ");
-            int birthDateMonth = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter day of birth of new user:\t");
-            int birthDateDay = Convert.ToInt32(Console.ReadLine());
-            BirthDate = new DateTime(birthDateYear, birthDateMonth, birthDateDay);
-            Age = (DateTime.Now.Year - BirthDate.Year);
+        public int Age {
+            get
+            {
+                int _ageCorrection = 0;
+                if (DateTime.Now.Month < BirthDate.Month || (DateTime.Now.Month == BirthDate.Month && DateTime.Now.Day < BirthDate.Day))
+                {
+                    _ageCorrection = 1;
+                }
+                return DateTime.Now.Year - BirthDate.Year - _ageCorrection;
+            }
+            private set {}
         }
+        
+        public User(string _fName, string _lName, string _pName, int _year, int _month, int _day)
+        {
+            FirstName = _fName;
+            LastName = _lName;
+            PatronymicName = _pName;
+            this.GetBirthDate(_year, _month, _day);
+        }
+
         public void UserShowInfo()
         {
             Console.WriteLine($"\nUser: {FirstName} {LastName} {PatronymicName}\n" +
                 $"Date of birth: {BirthDate.Day}/{BirthDate.Month}/{BirthDate.Year}\n" +
                 $"Age: {Age}");
+        }
+        public void GetBirthDate(int year, int month, int day)
+        {
+            BirthDate = new DateTime(year, month, day);
         }
     }
 
@@ -44,8 +51,21 @@ namespace Task1
         static void Main(string[] args)
         {
             Console.WriteLine("This porgram creates new User with entered by console params.");
-            User admin = new User();
-            admin.CreateUserFromConsole();
+
+            Console.Write("Enter first name of new user: ");
+            string fName = Console.ReadLine();
+            Console.Write("Enter second name of new user: ");
+            string lName = Console.ReadLine();
+            Console.Write("Enter patronymic name of new user: ");
+            string pName = Console.ReadLine();
+            Console.Write("Enter year of birth of new user: ");
+            int year = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter month of birth of new user: ");
+            int month = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter day of birth of new user:\t");
+            int day = Convert.ToInt32(Console.ReadLine());
+            
+            User admin = new User(fName, lName, pName, year, month, day);
             admin.UserShowInfo();
 
             Console.WriteLine("\n\nEnd of program. Press any key.");

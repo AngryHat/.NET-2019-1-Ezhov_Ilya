@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task2
+namespace Task2           // переделать через конструкторы, чтобы проверки выполнялись корректо
 {
     class Round
     {
@@ -30,6 +30,15 @@ namespace Task2
                     Console.WriteLine("Radius can't be less or equals zero.\n");
                 }
             }
+        }
+
+        public Round(double _x, double _y, double _r)
+        {
+            CenterX = _x;
+            CenterY = _y;
+            Radius = _r;
+            this.GetCircumference();
+            this.GetRoundArea();
         }
 
         public void GetRoundArea()
@@ -60,16 +69,17 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            Round round = new Round();
+            
             Console.WriteLine("This program reads coordinates and radius of round from the console and outputs information about it.\n");
             Console.Write("Enter X coordinate of the round: ");
-            round.CenterX = double.Parse(Console.ReadLine());
+            double x = double.Parse(Console.ReadLine());
             Console.Write("Enter Y coordinate of the round: ");
-            round.CenterY = double.Parse(Console.ReadLine());
+            double y = double.Parse(Console.ReadLine());
             Console.Write("Enter radius of the round: ");
-            round.Radius = double.Parse(Console.ReadLine());
-            round.GetCircumference();
-            round.GetRoundArea();
+            double r = double.Parse(Console.ReadLine());
+
+            Round round = new Round(x,y,r);
+            
             round.ShowInfo();
 
             Console.WriteLine("\n\nEnd of program. Press any key.");

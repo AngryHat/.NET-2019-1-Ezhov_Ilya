@@ -16,13 +16,13 @@ namespace Task5
             //string input = @"<b>Это</b> текст <i>с</i> <font color=”red”>HTML</font> кодами";
             Console.WriteLine("Please enter your HTML code:");
             string input = Console.ReadLine();
-            string result = input;
+            string result = string.Empty;
 
             RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Multiline;
 
             foreach (Match m in Regex.Matches(input, pattern, options))
             {
-                result = result.Replace(m.Value, "_");
+                result = input.Replace(m.Value, "_");
             }
             Console.WriteLine(result);
 
