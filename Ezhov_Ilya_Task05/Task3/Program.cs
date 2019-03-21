@@ -8,26 +8,25 @@ namespace Task3
 {
     class Triangle
     {
-        public bool Exist;
-        public double Perimeter;
-        public double Area;
-        private double _sideA;
+        private bool _exist;
+        private double _perimeter;
+        private double _area;
+        private double _a;
         public double SideA
         {
             get
             {
-                return _sideA;
+                return _a;
             }
             set
             {
                 if (value > 0)
                 {
-                    _sideA = value;
+                    _a = value;
                 }
                 else
                 {
                     Console.WriteLine("Size can't be less or equals zero.\n");
-                    Exist = false;
                 }
             }
         }
@@ -47,7 +46,6 @@ namespace Task3
                 else
                 {
                     Console.WriteLine("Size can't be less or equals zero.\n");
-                    Exist = false;
                 }
             }
         }
@@ -67,43 +65,44 @@ namespace Task3
                 else
                 {
                     Console.WriteLine("Size can't be less or equals zero.\n");
-                    Exist = false;
                 }
             }
         }
-        public void TriangleEixst()
+        
+        public Triangle(double _a, double _b, double _c)
         {
-            if ((_sideA <= _sideB + _sideC) && (_sideB <= _sideA + _sideC) && (_sideC <= _sideA + _sideB))
+            if ((_a <= _b + _c) && (_b <= _a + _c) && (_c <= _a + _b))
             {
-                Exist = true;
-            }
-            else
-            {
-                Console.WriteLine("Size can't be less or equals zero.\n");
-                Exist = false;
+                _exist = true;
+                SideA = _a;
+                SideB = _b;
+                SideC = _c;
+                this.GetPerimeter();
+                this.GetArea();
             }
         }
+
         public void GetPerimeter()
         {
-            Perimeter = SideA + SideB + SideC;
+            _perimeter = SideA + SideB + SideC;
         }
         public void GetArea()
         {
-            double p = Perimeter / 2;
-            Area = Math.Sqrt((p) * (p - SideA) * (p - SideB) * (p - SideC));
+            double p = _perimeter / 2;
+            _area = Math.Sqrt((p) * (p - SideA) * (p - SideB) * (p - SideC));
         }
 
         public void ShowInfo()
         {
-            if (Exist)
+            if (_exist)
             {
                 Console.WriteLine($"\nSides of triangle: {SideA}, {SideB} and {SideC}.");
-                Console.WriteLine($"Perimeter of triangle: {Perimeter}.");
-                Console.WriteLine($"Area of triangle: {Area}.");
+                Console.WriteLine($"Perimeter of triangle: {_perimeter}.");
+                Console.WriteLine($"Area of triangle: {_area}.");
             }
             else
             {
-                Console.WriteLine("Triangle does not exist.\n");
+                Console.WriteLine("\nTriangle does not exist.");
             }
         }
     }
@@ -111,17 +110,16 @@ namespace Task3
     {
         static void Main(string[] args)
         {
-            Triangle triangle = new Triangle();
+            
             Console.WriteLine("This program reads sides of triangle from the console and outputs information about it.\n");
             Console.Write("Enter side A coordinate of the round: ");
-            triangle.SideA = double.Parse(Console.ReadLine());
+            double a = double.Parse(Console.ReadLine());
             Console.Write("Enter side B coordinate of the round: ");
-            triangle.SideB = double.Parse(Console.ReadLine());
+            double b = double.Parse(Console.ReadLine());
             Console.Write("Enter side C coordinate of the round: ");
-            triangle.SideC = double.Parse(Console.ReadLine());
-            triangle.TriangleEixst();
-            triangle.GetPerimeter();
-            triangle.GetArea();
+            double c = double.Parse(Console.ReadLine());
+
+            Triangle triangle = new Triangle(a,b,c);
             triangle.ShowInfo();
 
             Console.WriteLine("\n\nEnd of program. Press any key.");

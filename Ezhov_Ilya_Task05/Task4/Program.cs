@@ -21,17 +21,9 @@ namespace Task4
 
         public static MyString operator +(MyString str1, MyString str2)
         {
-            int length = str1.Value.Length + str2.Value.Length;
-            char[] result = new char[length];
-           
-            for (int i = 0; i < str1.Value.Length; i++)
-            {
-                result[i] = str1.Value[i];
-            }
-            for (int i = 0; i < str2.Value.Length; i++)
-            {
-                result[i + str1.Value.Length] = str2.Value[i];
-            }
+            char[] result = new char[str1.Value.Length + str2.Value.Length];
+            str1.Value.CopyTo(result, 0);
+            str2.Value.CopyTo(result, str1.Value.Length);
             return new MyString(result);
         }
         public static MyString operator -(MyString str1, MyString str2)
@@ -87,20 +79,17 @@ namespace Task4
             MyString myStrHello = new MyString("Hello world");
             MyString myStrO = new MyString("o");
             MyString myStrResult;
-            bool equals;
 
             myStrResult = myStrHello + myStrO;
             Console.WriteLine($"MyString \'{myStrHello.ToString()}\' + MyString \'{myStrO.ToString()}\' = {myStrResult.ToString()}.\n");
 
             myStrResult = myStrHello - myStrO;
             Console.WriteLine($"MyString \'{myStrHello.ToString()}\' - MyString \'{myStrO.ToString()}\' = {myStrResult.ToString()}.\n");
-
-            equals = myStrHello == myStrO;
-            Console.WriteLine($"Is MyString \'{myStrHello.ToString()}\' and MyString \'{myStrO.ToString()}\' are equals?: {equals}.\n");
+            
+            Console.WriteLine($"Is MyString \'{myStrHello.ToString()}\' and MyString \'{myStrO.ToString()}\' are equals?: {myStrHello == myStrO}.\n");
 
             MyString myStrHelloCopy = new MyString("Hello world");
-            equals = myStrHello == myStrO;
-            Console.WriteLine($"Is MyString \'{myStrHello.ToString()}\' and MyString \'{myStrHelloCopy.ToString()}\' are equals?: {equals}.\n");
+            Console.WriteLine($"Is MyString \'{myStrHello.ToString()}\' and MyString \'{myStrHelloCopy.ToString()}\' are equals?: {myStrHello == myStrHelloCopy}.\n");
 
             Console.WriteLine("\n\nEnd of program. Press any key.");
             Console.ReadKey();
