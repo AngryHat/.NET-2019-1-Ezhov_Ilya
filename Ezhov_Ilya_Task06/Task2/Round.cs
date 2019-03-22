@@ -32,6 +32,18 @@ namespace Task2
             }
         }
 
+        public Round()
+        {
+        }
+        public Round(double _x, double _y, double _r)
+        {
+            CenterX = _x;
+            CenterY = _y;
+            Radius = _r;
+            this.GetCircumference();
+            this.GetRoundArea();
+        }
+
         public void GetRoundArea()
         {
             Area = Math.PI * Radius * Radius;

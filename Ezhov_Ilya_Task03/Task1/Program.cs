@@ -20,8 +20,9 @@ namespace Task1
             Console.WriteLine($"This program generates array with random size between {arrayMinSize} and {arrayMaxSize} and fill it with random numbers between {minValue} and {maxValue}.\n");
             GenerateRandomArrayInt(array, minValue, maxValue);
             // ShowArrayInt(array);
-            ShowMinMaxArrayInt(array);
             SortArrayInt(array);
+            Console.WriteLine("Array has been sorted.\n");
+            ShowMinMaxArraySortedInt(array);
             ShowArrayInt(array);
 
             Console.WriteLine("\n\n\nEnd of program. Press any key.");
@@ -45,8 +46,12 @@ namespace Task1
             }
             Console.WriteLine();
         }
-
-        public static void ShowMinMaxArrayInt(int[] inputArray)
+        public static void ShowMinMaxArraySortedInt(int[] inputArray)
+        {
+            Console.WriteLine($"Maximal value of array is {inputArray[inputArray.Length - 1]}.");
+            Console.WriteLine($"Minimal value of array is {inputArray[0]}.\n");
+        }
+            public static void ShowMinMaxArrayNotSortedInt(int[] inputArray)
         {
             int minValue = inputArray[0];
             int maxValue = inputArray[0];
@@ -80,7 +85,6 @@ namespace Task1
                     }
                 }
             }
-            Console.WriteLine("Array has been sorted.\n");
         }
     }
 }
