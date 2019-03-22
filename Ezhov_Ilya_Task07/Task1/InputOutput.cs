@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-
-    class Program
+    class InputOutput
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }
