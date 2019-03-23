@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Rectangle : Figure, IDrawable
+    class Rectangle : Figure
     {
         private double _width;
         public double Width
@@ -58,7 +58,16 @@ namespace Task1
         }
         public override void Draw()
         {
-            Console.WriteLine($"Rectangle. Start coordinates (top, left) {startX},{startY}; width is {Width}, length is {Length}; area is { ShowRactangleArea()}.");
+            Console.WriteLine($"\nRectangle has been created. Start coordinates (top, left) - {startX},{startY}; width - {Width:F3}; length - {Length:F3}; area - { ShowRactangleArea():F3}.\n");
+        }
+
+        public Rectangle(int sX, int sY, double w, double l)
+        {
+            startX = sX;
+            startY = sY;
+            Width = w;
+            Length = l;
+            Draw();
         }
     }
 

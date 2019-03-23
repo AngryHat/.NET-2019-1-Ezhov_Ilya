@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Round : Circle, IDrawable
+    class Round : Circle
     {
         public double Area;
         public void GetRoundArea()
@@ -20,7 +20,17 @@ namespace Task1
         }
         public override void Draw()
         {
-            Console.WriteLine($"Circle created. Start coordinates {startX},{startY}; radius of circle {Radius}, length is {ShowCircleLength()}, area is {ShowRoundArea()}.");
+            Console.WriteLine($"\nRound has been created. Start coordinates {startX},{startY}; radius - {Radius:F3}; length - {ShowCircleLength():F3}; area - {ShowRoundArea():F3}.\n");
+        }
+
+        public Round()
+        { }
+        public Round(int sX, int sY, double r)
+        {
+            startX = sX;
+            startY = sY;
+            Radius = r;
+            Draw();
         }
     }
 }

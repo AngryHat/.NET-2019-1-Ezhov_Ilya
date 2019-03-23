@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Circle : Figure, IDrawable
+    class Circle : Figure
     {
         private double _radius;
         public double Radius
@@ -17,7 +17,7 @@ namespace Task1
             }
             set
             {
-                if (Radius > 0)
+                if (value > 0)
                 {
                     _radius = value;
                 }
@@ -39,7 +39,16 @@ namespace Task1
         }
         public override void Draw()
         {
-            Console.WriteLine($"Circle created. Start coordinates {startX},{startY}; radius of circle {Radius}, length is {ShowCircleLength()}.");
+            Console.WriteLine($"\nCircle has been created. Start coordinates - {startX},{startY}; radius - {Radius:F3}; length - {ShowCircleLength():F3}.\n");
+        }
+        public Circle()
+        { }
+        public Circle(int sX, int sY, double r)
+        {
+            startX = sX;
+            startY = sY;
+            Radius = r;
+            Draw();
         }
     }
 }

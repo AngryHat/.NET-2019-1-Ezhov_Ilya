@@ -6,22 +6,52 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-    class Ring : Round, IDrawable
+    class Ring : Round
     {
-        public double ringArea;
-        public double innerRadius;
-        public void GetRingArea()
+        public double RingArea;
+        private double innerArea;
+        private double _innerRadius;
+        public double InnerRadius
         {
-            Area = Math.PI * Radius * Radius;
+            get
+            {
+                return _innerRadius;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    _innerRadius = value;
+                }
+                else
+                {
+                    throw new Exception("Inner radius must be positive.");
+                }
+            }
+        }
+        public void GetInnerArea()
+        {
+            innerArea = Math.PI * InnerRadius * InnerRadius;
         }
         public double ShowRingArea()
         {
-            GetRingArea();
-            return Area;
+            GetInnerArea();
+            GetRoundArea();
+            RingArea = Area - innerArea;
+            return RingArea;
         }
         public override void Draw()
         {
-            Console.WriteLine($"Ring created. Start coordinates {startX},{startY}; radius of circle {Radius}, length is {ShowCircleLength()}, area is {}.");
+            Console.WriteLine($"\nRing has been created. Start coordinates - {startX},{startY}; outer radius - {Radius:F3}; inner raduis - {InnerRadius:F3}; area - {ShowRingArea():F3}.\n");
+        }
+
+        public Ring(int sX, int sY, double r, double ir)
+        {
+            startX = sX;
+            startY = sY;
+            Radius = r;
+            InnerRadius = ir;
+            Draw();
         }
     }
 }
