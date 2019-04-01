@@ -45,6 +45,7 @@ namespace Task2
             _array = inputArray;
             Length = inputArray.Length;
         }
+        // TASK 9-2
         public DynamicArray(IEnumerable<T> collection)
         {
             _array = new T[collection.Count()];
@@ -118,6 +119,7 @@ namespace Task2
                 throw new ArgumentOutOfRangeException("The index is outside the bounds of the array.");
             }
         }
+        //not tested
         public IEnumerator GetEnumerator()
         {
             return _array.GetEnumerator();

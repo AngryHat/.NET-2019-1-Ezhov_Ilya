@@ -51,12 +51,15 @@ namespace Task1
             Console.ReadKey();
         }
 
-        public static void RemoveEveryRemoveEachSecondItem(List<Person> list)
+        // new collection
+        public static void RemoveEveryRemoveEachSecondItem(IEnumerable<Person> list)
         {
             while (list.Count != 1)
             {
+                bool isEven = false;
                 for (int i = 0; i < list.Count; i++)
                 {
+                    isEven = !isEven;
                     if (i % 2 == 0)
                     {
                         list.RemoveAt(i);
