@@ -2,20 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace Task1
+namespace Task3
 {
     class Program
     {
-        public delegate int del(string str1, string str2);
-        public static del myDel;
+        public delegate int delegateSimple(string str1, string str2);
+        public static delegateSimple myDelegate;
+        public delegate void delegateThread();
+        public static delegateThread myDelThread;
+
+        public static string[] inputThread;
+        public static bool ThreadSoryingDone = false;
 
         static void Main(string[] args)
         {
             string[] input = { "abbaaaa", "ccc", "a", "aba", "ab", "caabaa", "abb", "aaaabaa", "ac", "b", "abaaaba", "c", "caabba", "aaabba", "aa" };
+            inputThread = input;
+            myDelThread = SortArrayThread;
+            
 
             Console.WriteLine("This program sort array of strings and uses delegate to compare strings." +
+                "\nAlso sorting executing in it's own thread." +
                 $"\n\nOriginal arrays is: ");
             int count = 0;
             foreach (var item in input)
@@ -24,9 +34,12 @@ namespace Task1
                 count++;
             }
             Console.WriteLine("\n\n");
-
-            SortArray(input);
-
+            
+            StartSortingThread();
+            while (!ThreadSoryingDone)
+            {
+                Thread.Sleep(50);
+            }
 
             Console.WriteLine("Sorted arrays is: ");
             count = 0;
@@ -46,40 +59,33 @@ namespace Task1
             {
                 for (int j = i; j < stringArray.Length; j++)
                 {
-                    myDel = new del(CompareStrings);
-                    if (myDel(stringArray[i], stringArray[j]) == 1)
+                    myDelegate = new delegateSimple(CompareStrings);
+                    if (myDelegate(stringArray[i], stringArray[j]) == 1)
                     {
                         SwapElements(stringArray, i, j);
                     }
-                    if (myDel(stringArray[i], stringArray[j]) == 2)
+                    if (myDelegate(stringArray[i], stringArray[j]) == 2)
                     {
                         SwapElements(stringArray, i, j);
                     }
                 }
             }
         }
-        //public static bool CompareStringsByLength(string str1, string str2)
-        //{
-        //    if (str1.Length > str2.Length)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-        //public static bool CompareStringsByAlphabet(string str1, string str2)
-        //{
-        //    if (str1.Length == str2.Length && string.Compare(str1, str2) == 1)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+
+        public static void StartSortingThread()
+        {
+            Thread thread = new Thread(new ThreadStart(SortArrayThread));
+            thread.Start();
+        }
+        public static void SortArrayThread()
+        {
+            Console.WriteLine("Sorting thread started.");
+            SortArray(inputThread);
+            ThreadSoryingDone = true;
+            Console.WriteLine("Sorting thread ended.");
+
+        }
+        
         public static void SwapElements(string[] arr, int index, int index2)
         {
             string temp = arr[index2];
