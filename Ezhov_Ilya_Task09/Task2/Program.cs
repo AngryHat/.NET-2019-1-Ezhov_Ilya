@@ -41,7 +41,7 @@ namespace Task2
 
             }
             Console.WriteLine("End of program. Press any key.");
-            Console.WriteLine();
+            Console.ReadKey();
         }
     }
 }

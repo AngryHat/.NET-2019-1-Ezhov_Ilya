@@ -88,12 +88,12 @@ namespace Task3
         }
     }
 
-    public class HashCodeDemo
+    public class Program
     {
         public static void Main(string[] args)
         {
-            TwoDPoint point1 = new TwoDPoint(1, 10);
-            TwoDPoint point2 = new TwoDPoint(1, 10);
+            TwoDPoint point1 = new TwoDPoint(1, 1);
+            TwoDPoint point2 = new TwoDPoint(10, 10);
 
             Console.WriteLine("Hash for point1: {0}\tHash for point2: {1}", point1.GetHashCode(), point2.GetHashCode());
 

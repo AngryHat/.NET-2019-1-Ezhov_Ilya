@@ -19,11 +19,11 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            int numberOfPeople = 158;
+            int numberOfPeople = 13;
             Console.WriteLine($"This program removes every second element from list and linked list. Number of elements in collections is {numberOfPeople}.");
 
             List<Person> peopleList = new List<Person>();
-            for (int i = 0; i < numberOfPeople; i++)
+            for (int i = 1; i < numberOfPeople; i++)
             {
                 peopleList.Add(new Person(i));
             }
@@ -35,7 +35,7 @@ namespace Task1
             }
 
             LinkedList<Person> peopleLinkedList = new LinkedList<Person>();
-            for (int i = 0; i < numberOfPeople; i++)
+            for (int i = 1; i < numberOfPeople; i++)
             {
                 peopleLinkedList.AddLast(new Person(i));
             }
@@ -51,47 +51,28 @@ namespace Task1
             Console.ReadKey();
         }
 
-        // new collection
-        public static void RemoveEveryRemoveEachSecondItem(IEnumerable<Person> list)
+        public static void RemoveEveryRemoveEachSecondItem(ICollection<Person> inputList)
         {
-            while (list.Count != 1)
+            bool isEven = false;
+            while (inputList.Count > 1)
             {
-                bool isEven = false;
-                for (int i = 0; i < list.Count; i++)
+                var evenPersons = new List<Person>();
+
+                foreach (var evenPerson in inputList)
                 {
+                    if (isEven)
+                    {
+                        evenPersons.Add(evenPerson);
+                    }
                     isEven = !isEven;
-                    if (i % 2 == 0)
-                    {
-                        list.RemoveAt(i);
-                    }
                 }
-            }
-        }
-        public static void RemoveEveryRemoveEachSecondItem(LinkedList<Person> list)
-        {
-            var current = list.First;
-            var next = current.Next;
-
-            while (list.Count != 1)
-            {
-                for (int i = 0; i < list.Count; i++)
+                foreach (var evenPerson in evenPersons)
                 {
-
-                    if (i % 2 == 0 && current != null)
-                    {
-                        list.Remove(current);
-                    }
-                    current = next;
-                    if (next == null)
-                    {
-                        next = list.First;
-                    }
-                    else {
-                        next = next.Next;
-                    }
+                    inputList.Remove(evenPerson);
+                    //  Check
+                    //Console.WriteLine($"Person number {evenPerson.PersonalNumber} has been removed.");
                 }
             }
         }
     }
 }
-
