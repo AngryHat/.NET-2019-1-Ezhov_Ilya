@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
+    // ПЕРЕДЕЛАТЬ ЧЕРЕЗ ИВЕНТ
     class Program
     {
         public delegate int delegateSimple(string str1, string str2);
