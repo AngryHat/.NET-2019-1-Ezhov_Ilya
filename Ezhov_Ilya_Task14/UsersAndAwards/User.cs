@@ -71,6 +71,8 @@ namespace UsersAndAwards
             }
         }
 
+        public List<Award> Awards = new List<Award>();
+
         public User(string fname, string lname, DateTime bdate)
         {
             FirstName = fname;
