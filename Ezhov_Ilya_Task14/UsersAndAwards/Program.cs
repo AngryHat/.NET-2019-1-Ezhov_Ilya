@@ -4,19 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TestWinForms
+namespace UsersAndAwards
 {
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new Form1());
         }
     }
 }

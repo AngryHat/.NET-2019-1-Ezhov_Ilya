@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestWinForms
+namespace UsersAndAwards
 {
-    public class User
+    class User
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
         private string _firstName { get; set; }
         public string FirstName
@@ -71,12 +71,5 @@ namespace TestWinForms
             }
         }
 
-
-        public User(string lastName, string firstName)
-        {
-            Id = 0;
-            FirstName = firstName;
-            LastName = lastName;
-        }
     }
 }
