@@ -71,5 +71,12 @@ namespace UsersAndAwards
             }
         }
 
+        public User(string fname, string lname, DateTime bdate)
+        {
+            FirstName = fname;
+            LastName = lname;
+            BirthDate = bdate;
+        }
+
     }
 }
