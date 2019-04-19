@@ -27,7 +27,7 @@ namespace Task2
             }
         }
 
-        public void LoggerRun()
+        public static void LoggerRun()
         {
             string startMessage = ("\n\n" + DateTime.Now + " logger is running.");
             log.Add(startMessage);
@@ -38,7 +38,7 @@ namespace Task2
         }
 
         // writing to log from List<string> log
-        public void LoggerWrite()
+        public static void LoggerWrite()
         {
             if (!File.Exists(_loggerFileName))
             {
@@ -56,6 +56,9 @@ namespace Task2
 
     public class Watcher
     {
+        // бэкапф фолдер перенести сюда
+        // вотчер просто наблюдает логгер пишет
+
         public static void WatcherRun()
         {
             CheckAndCreateDirectories();
@@ -117,19 +120,20 @@ namespace Task2
         {
             //read line
             Console.WriteLine("You entered backup mode. To backup file please enter the name of file and date and time of version you want to restore.");
+            Console.WriteLine("This program is not so perfect, so you have to enter file name, space and date and time(include mintes) to restore previous version of file.");
             RestoreFile();
         }
 
+        // добавить рестор в вотчер
+        // вотчер для наблюдения сохранения и восстановления
         public static void RestoreFile()
         {
-            // move the filename getter out from these method
-            string backupRequest = "\\File.txt 2019-4-12 19-1-38";
-            //string backupPath = Logger.BackupFolderPath + backupRequest;
+            string backupRequest = Console.ReadLine();
             string backupPath = Logger.BackupFolderPath + backupRequest;
             if (File.Exists(backupPath))
             {
-                int n = backupRequest.IndexOf(" 2019-4-12 19-1-38");
-                string originalFileName = backupRequest.Remove(n, " 2019-4-12 19-1-38".Length);
+                int n = backupRequest.IndexOf(" ");
+                string originalFileName = backupRequest.Remove(n, 18); // 18 it is the date time format
                 File.Delete(Logger.WatchingFolderPath + originalFileName);
                 File.Copy(backupPath, Logger.WatchingFolderPath + originalFileName);
                 Console.WriteLine("File replaced");
@@ -145,8 +149,24 @@ namespace Task2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Logger - 1; Backupper - 2");
-            BackUpper.RestoreFile();
+            Console.WriteLine("This program is version control system. You have two modes to choose:" +
+                "\nEnter 1 for log mode." +
+                "'nEnter 2 for backup mode.");
+
+            string modeChoice = System.Console.ReadLine();
+            if (modeChoice == "1")
+            {
+                Logger.LoggerRun();
+            }
+            if (modeChoice == "2")
+            {
+                BackUpper.BackUpperRun();
+            }
+            else
+            {
+                Console.WriteLine("Wrong input. Try again.");
+            }
+
 
             Console.WriteLine("\n\nEnd of program. Press any key.");
             Console.ReadKey();
