@@ -33,8 +33,8 @@ namespace UsersAndAwards
             awardsList.Add(new Award("Oscar", "Wow! You acted awesome in that movie, but of course, yuo already know it."));
 
             InitializeComponent();
-            gdvUsers.DataSource = usersList;
-            gdvAwards.DataSource = awardsList;
+            dgvUsers.DataSource = usersList;
+            dgvAwards.DataSource = awardsList;
         }
 
         private void gdvMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -95,14 +95,30 @@ namespace UsersAndAwards
 
         public void RefreshUsersGrid()
         {
-            gdvUsers.DataSource = null;
-            gdvUsers.DataSource = usersList;
+            dgvUsers.DataSource = null;
+            dgvUsers.DataSource = usersList;
         }
 
         public void RefreshAwardsGrid()
         {
-            gdvUsers.DataSource = null;
-            gdvUsers.DataSource = usersList;
+            dgvUsers.DataSource = null;
+            dgvUsers.DataSource = usersList;
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            UserStorage.Add();
+            RefreshUsersGrid();
+        }
+
+        private void btnEditUser_Click(object sender, EventArgs e)
+        {
+            //AwardStorage.Edit();
+        }
+
+        private void btnCloseProgram_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
