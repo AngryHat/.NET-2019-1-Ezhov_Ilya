@@ -27,18 +27,18 @@ namespace UsersAndAwards
             }
         }
 
-        private string _decription { get; set; }
-        public string Decsrition
+        private string _description { get; set; }
+        public string Description
         {
             get
             {
-                return _decription ?? "No description";
+                return _description ?? "No description";
             }
             set
             {
                 if (value.Length < 250)
                 {
-                    _decription = value;
+                    _description = value;
                 }
                 //EXC
             }
@@ -47,7 +47,7 @@ namespace UsersAndAwards
         public Award(string title, string description)
         {
             Title = title;
-            Decsrition = description;
+            Description = description;
         }
     }
 }

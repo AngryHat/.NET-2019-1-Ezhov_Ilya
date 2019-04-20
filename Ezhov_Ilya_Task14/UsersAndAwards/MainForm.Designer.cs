@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gdvMain = new System.Windows.Forms.DataGridView();
+            this.gdvUsers = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -37,26 +37,32 @@
             this.tabMainContainer = new System.Windows.Forms.TabControl();
             this.usersTab = new System.Windows.Forms.TabPage();
             this.awardsTab = new System.Windows.Forms.TabPage();
-            ((System.ComponentModel.ISupportInitialize)(this.gdvMain)).BeginInit();
+            this.gdvAwards = new System.Windows.Forms.DataGridView();
+            this.AwardsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.gdvUsers)).BeginInit();
             this.tabMainContainer.SuspendLayout();
             this.usersTab.SuspendLayout();
+            this.awardsTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gdvAwards)).BeginInit();
             this.SuspendLayout();
             // 
-            // gdvMain
+            // gdvUsers
             // 
-            this.gdvMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gdvMain.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gdvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gdvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
             this.FirstName,
             this.LastName,
             this.BirthDate,
             this.Age});
-            this.gdvMain.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gdvMain.Location = new System.Drawing.Point(3, 3);
-            this.gdvMain.Name = "gdvMain";
-            this.gdvMain.Size = new System.Drawing.Size(770, 340);
-            this.gdvMain.TabIndex = 0;
-            this.gdvMain.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gdvMain_ColumnHeaderMouseClick);
+            this.gdvUsers.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gdvUsers.Location = new System.Drawing.Point(3, 3);
+            this.gdvUsers.Name = "gdvUsers";
+            this.gdvUsers.Size = new System.Drawing.Size(770, 340);
+            this.gdvUsers.TabIndex = 0;
+            this.gdvUsers.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gdvMain_ColumnHeaderMouseClick);
             // 
             // Id
             // 
@@ -101,7 +107,7 @@
             // 
             // usersTab
             // 
-            this.usersTab.Controls.Add(this.gdvMain);
+            this.usersTab.Controls.Add(this.gdvUsers);
             this.usersTab.Location = new System.Drawing.Point(4, 22);
             this.usersTab.Name = "usersTab";
             this.usersTab.Padding = new System.Windows.Forms.Padding(3);
@@ -112,13 +118,45 @@
             // 
             // awardsTab
             // 
+            this.awardsTab.Controls.Add(this.gdvAwards);
             this.awardsTab.Location = new System.Drawing.Point(4, 22);
             this.awardsTab.Name = "awardsTab";
             this.awardsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.awardsTab.Size = new System.Drawing.Size(776, 322);
+            this.awardsTab.Size = new System.Drawing.Size(776, 374);
             this.awardsTab.TabIndex = 1;
             this.awardsTab.Text = "Awards";
             this.awardsTab.UseVisualStyleBackColor = true;
+            // 
+            // gdvAwards
+            // 
+            this.gdvAwards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gdvAwards.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AwardsId,
+            this.Title,
+            this.Description});
+            this.gdvAwards.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gdvAwards.Location = new System.Drawing.Point(3, 3);
+            this.gdvAwards.Name = "gdvAwards";
+            this.gdvAwards.Size = new System.Drawing.Size(770, 340);
+            this.gdvAwards.TabIndex = 1;
+            // 
+            // AwardsId
+            // 
+            this.AwardsId.DataPropertyName = "Id";
+            this.AwardsId.HeaderText = "ID";
+            this.AwardsId.Name = "AwardsId";
+            // 
+            // Title
+            // 
+            this.Title.DataPropertyName = "Title";
+            this.Title.HeaderText = "Title";
+            this.Title.Name = "Title";
+            // 
+            // Description
+            // 
+            this.Description.DataPropertyName = "Description";
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
             // 
             // MainForm
             // 
@@ -128,16 +166,18 @@
             this.Controls.Add(this.tabMainContainer);
             this.Name = "MainForm";
             this.Text = "Users & Rewards";
-            ((System.ComponentModel.ISupportInitialize)(this.gdvMain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdvUsers)).EndInit();
             this.tabMainContainer.ResumeLayout(false);
             this.usersTab.ResumeLayout(false);
+            this.awardsTab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gdvAwards)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView gdvMain;
+        private System.Windows.Forms.DataGridView gdvUsers;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
@@ -146,6 +186,10 @@
         private System.Windows.Forms.TabControl tabMainContainer;
         private System.Windows.Forms.TabPage usersTab;
         private System.Windows.Forms.TabPage awardsTab;
+        private System.Windows.Forms.DataGridView gdvAwards;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AwardsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
     }
 }
 

@@ -17,18 +17,24 @@ namespace UsersAndAwards
 
         public bool SortDirection = true;
 
-        List<User> usersList = new List<User>();
-        List<Award> awardsList = new List<Award>();
-
+        List<User> usersList = UserStorage.usersList;
+        List<Award> awardsList = AwardStorage.awardsList;
+        
         public MainForm()
         {
+            // adding some users
             usersList.Add(new User("Ivan", "Ruka", DateTime.Parse("1989.11.23")));
             usersList.Add(new User("Roman", "Zhukov", DateTime.Parse("1999.02.11")));
             usersList.Add(new User("Alena", "Apina", DateTime.Parse("1987.03.08")));
             usersList.Add(new User("Vasyliy", "Erohin", DateTime.Parse("1963.08.14")));
 
+            // adding some awards
+            awardsList.Add(new Award("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!"));
+            awardsList.Add(new Award("Oscar", "Wow! You acted awesome in that movie, but of course, yuo already know it."));
+
             InitializeComponent();
-            gdvMain.DataSource = usersList;
+            gdvUsers.DataSource = usersList;
+            gdvAwards.DataSource = awardsList;
         }
 
         private void gdvMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -36,6 +42,7 @@ namespace UsersAndAwards
             SortBy(e.ColumnIndex);
         }
 
+        // Users GDV methods
         public void SortBy(int columIndex)
         {
             if (columIndex == 1) //FIRST NAME
@@ -83,8 +90,19 @@ namespace UsersAndAwards
                 }
             }
             SortDirection = !SortDirection;
-            gdvMain.DataSource = null;
-            gdvMain.DataSource = usersList;
+            RefreshUsersGrid();
+        }
+
+        public void RefreshUsersGrid()
+        {
+            gdvUsers.DataSource = null;
+            gdvUsers.DataSource = usersList;
+        }
+
+        public void RefreshAwardsGrid()
+        {
+            gdvUsers.DataSource = null;
+            gdvUsers.DataSource = usersList;
         }
     }
 }

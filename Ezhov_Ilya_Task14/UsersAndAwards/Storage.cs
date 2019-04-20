@@ -15,7 +15,7 @@ namespace UsersAndAwards
 
     class UserStorage
     {
-        public List<User> usersList = new List<User>();
+        public static List<User> usersList = new List<User>();
 
         public void Add()
         {
@@ -35,7 +35,7 @@ namespace UsersAndAwards
 
     class AwardStorage
     {
-        public List<Award> awardsList = new List<Award>();
+        public static List<Award> awardsList = new List<Award>();
 
         public void Add()
         {
