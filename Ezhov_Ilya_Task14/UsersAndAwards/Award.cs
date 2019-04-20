@@ -44,5 +44,10 @@ namespace UsersAndAwards
             }
         }
 
+        public Award(string title, string description)
+        {
+            Title = title;
+            Decsrition = description;
+        }
     }
 }

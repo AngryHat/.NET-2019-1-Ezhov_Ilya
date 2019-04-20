@@ -17,17 +17,18 @@ namespace UsersAndAwards
 
         public bool SortDirection = true;
 
-        List<User> list = new List<User>();
+        List<User> usersList = new List<User>();
+        List<Award> awardsList = new List<Award>();
 
         public MainForm()
         {
-            list.Add(new User("Ivan", "Ruka", DateTime.Parse("1989.11.23")));
-            list.Add(new User("Roman", "Zhukov", DateTime.Parse("1999.02.11")));
-            list.Add(new User("Alena", "Apina", DateTime.Parse("1987.03.08")));
-            list.Add(new User("Vasyliy", "Erohin", DateTime.Parse("1963.08.14")));
+            usersList.Add(new User("Ivan", "Ruka", DateTime.Parse("1989.11.23")));
+            usersList.Add(new User("Roman", "Zhukov", DateTime.Parse("1999.02.11")));
+            usersList.Add(new User("Alena", "Apina", DateTime.Parse("1987.03.08")));
+            usersList.Add(new User("Vasyliy", "Erohin", DateTime.Parse("1963.08.14")));
 
             InitializeComponent();
-            gdvMain.DataSource = list;
+            gdvMain.DataSource = usersList;
         }
 
         private void gdvMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -41,49 +42,49 @@ namespace UsersAndAwards
             {
                 if (SortDirection == true)
                 {
-                    list = new List<User>(list.OrderBy(user => user.FirstName).ToList());
+                    usersList = new List<User>(usersList.OrderBy(user => user.FirstName).ToList());
                 }
                 else
                 {
-                    list = new List<User>(list.OrderByDescending(user => user.FirstName).ToList());
+                    usersList = new List<User>(usersList.OrderByDescending(user => user.FirstName).ToList());
                 }
             }
             if (columIndex == 2) //LAST NAME
             {
                 if (SortDirection == true)
                 {
-                    list = new List<User>(list.OrderBy(user => user.LastName).ToList());
+                    usersList = new List<User>(usersList.OrderBy(user => user.LastName).ToList());
                 }
                 else
                 {
-                    list = new List<User>(list.OrderByDescending(user => user.LastName).ToList());
+                    usersList = new List<User>(usersList.OrderByDescending(user => user.LastName).ToList());
                 }
             }
             if (columIndex == 3) //BD
             {
                 if (SortDirection == true)
                 {
-                    list = new List<User>(list.OrderBy(user => user.BirthDate).ToList());
+                    usersList = new List<User>(usersList.OrderBy(user => user.BirthDate).ToList());
                 }
                 else
                 {
-                    list = new List<User>(list.OrderByDescending(user => user.BirthDate).ToList());
+                    usersList = new List<User>(usersList.OrderByDescending(user => user.BirthDate).ToList());
                 }
             }
             if (columIndex == 4) //AGE
             {
                 if (SortDirection == true)
                 {
-                    list = new List<User>(list.OrderBy(user => user.Age).ToList());
+                    usersList = new List<User>(usersList.OrderBy(user => user.Age).ToList());
                 }
                 else
                 {
-                    list = new List<User>(list.OrderByDescending(user => user.Age).ToList());
+                    usersList = new List<User>(usersList.OrderByDescending(user => user.Age).ToList());
                 }
             }
             SortDirection = !SortDirection;
             gdvMain.DataSource = null;
-            gdvMain.DataSource = list;
+            gdvMain.DataSource = usersList;
         }
     }
 }
