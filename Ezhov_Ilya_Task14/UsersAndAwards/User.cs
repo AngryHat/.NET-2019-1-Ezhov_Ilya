@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UsersAndAwards
 {
-    class User
+    public class User
     {
         public int id { get; set; }
 
@@ -73,11 +73,23 @@ namespace UsersAndAwards
 
         public List<Award> Awards = new List<Award>();
 
+        public User()
+        {
+        }
+
         public User(string fname, string lname, DateTime bdate)
         {
             FirstName = fname;
             LastName = lname;
             BirthDate = bdate;
+        }
+
+        public User(string fname, string lname, DateTime bdate, List<Award> awards)
+        {
+            FirstName = fname;
+            LastName = lname;
+            BirthDate = bdate;
+            Awards = awards;
         }
 
     }

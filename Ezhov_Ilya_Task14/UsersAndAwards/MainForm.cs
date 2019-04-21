@@ -107,19 +107,60 @@ namespace UsersAndAwards
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            UserStorage.Add();
+            UserForm userForm = new UserForm();
+            //userForm.Show();
+
+            if (userForm.ShowDialog(this) == DialogResult.OK)
+            {
+                User user = new User();
+                user.FirstName = userForm.FirstName;
+                user.LastName = userForm.LastName;
+                user.BirthDate = userForm.BirthDate;
+
+                usersList.Add(user);
+            }
             RefreshUsersGrid();
         }
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            //AwardStorage.Edit();
+            if (dgvUsers.SelectedCells.Count == 1)
+            {
+                User user = (User)dgvUsers.SelectedCells[0].OwningRow.DataBoundItem;
+
+                UserForm userForm = new UserForm(user);
+
+                if (userForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    user.FirstName = userForm.FirstName;
+                    user.LastName = userForm.LastName;
+                    user.BirthDate = userForm.BirthDate;
+                }
+                RefreshUsersGrid();
+            }
+        }
+
+        private void btnRemoveUser_Click(object sender, EventArgs e)
+        {
+            if (dgvUsers.SelectedCells.Count == 1)
+            {
+                var confirmRemove = MessageBox.Show("You are going to remove sclected user. Are you sure?", "User remove confirmation",
+                                     MessageBoxButtons.YesNo);
+                if (confirmRemove == DialogResult.Yes)
+                {
+                    User user = (User)dgvUsers.SelectedCells[0].OwningRow.DataBoundItem;
+                    usersList.Remove(user);
+                }
+            }
+            RefreshUsersGrid();
         }
 
         private void btnCloseProgram_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+
     }
 }
 

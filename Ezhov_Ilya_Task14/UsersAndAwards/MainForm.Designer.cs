@@ -29,22 +29,23 @@
         private void InitializeComponent()
         {
             this.dgvUsers = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabMainContainer = new System.Windows.Forms.TabControl();
             this.usersTab = new System.Windows.Forms.TabPage();
+            this.btnRemoveUser = new System.Windows.Forms.Button();
+            this.btnAddUser = new System.Windows.Forms.Button();
+            this.btnEditUser = new System.Windows.Forms.Button();
+            this.btnCloseProgram = new System.Windows.Forms.Button();
             this.awardsTab = new System.Windows.Forms.TabPage();
             this.dgvAwards = new System.Windows.Forms.DataGridView();
             this.AwardsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnCloseProgram = new System.Windows.Forms.Button();
-            this.btnEditUser = new System.Windows.Forms.Button();
-            this.btnAddUser = new System.Windows.Forms.Button();
-            this.btnRemoveUser = new System.Windows.Forms.Button();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Awards = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.tabMainContainer.SuspendLayout();
             this.usersTab.SuspendLayout();
@@ -60,43 +61,14 @@
             this.FirstName,
             this.LastName,
             this.BirthDate,
-            this.Age});
+            this.Age,
+            this.Awards});
             this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvUsers.Location = new System.Drawing.Point(3, 3);
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.Size = new System.Drawing.Size(770, 332);
             this.dgvUsers.TabIndex = 0;
             this.dgvUsers.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gdvMain_ColumnHeaderMouseClick);
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "ID";
-            this.Id.Name = "Id";
-            // 
-            // FirstName
-            // 
-            this.FirstName.DataPropertyName = "FirstName";
-            this.FirstName.HeaderText = "First Name";
-            this.FirstName.Name = "FirstName";
-            // 
-            // LastName
-            // 
-            this.LastName.DataPropertyName = "LastName";
-            this.LastName.HeaderText = "Last Name";
-            this.LastName.Name = "LastName";
-            // 
-            // BirthDate
-            // 
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Birth Date";
-            this.BirthDate.Name = "BirthDate";
-            // 
-            // Age
-            // 
-            this.Age.DataPropertyName = "Age";
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
             // 
             // tabMainContainer
             // 
@@ -123,6 +95,46 @@
             this.usersTab.TabIndex = 0;
             this.usersTab.Text = "Users";
             this.usersTab.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveUser
+            // 
+            this.btnRemoveUser.Location = new System.Drawing.Point(215, 341);
+            this.btnRemoveUser.Name = "btnRemoveUser";
+            this.btnRemoveUser.Size = new System.Drawing.Size(100, 30);
+            this.btnRemoveUser.TabIndex = 1;
+            this.btnRemoveUser.Text = "Remove";
+            this.btnRemoveUser.UseVisualStyleBackColor = true;
+            this.btnRemoveUser.Click += new System.EventHandler(this.btnRemoveUser_Click);
+            // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Location = new System.Drawing.Point(3, 341);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(100, 30);
+            this.btnAddUser.TabIndex = 1;
+            this.btnAddUser.Text = "Add";
+            this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
+            // 
+            // btnEditUser
+            // 
+            this.btnEditUser.Location = new System.Drawing.Point(109, 341);
+            this.btnEditUser.Name = "btnEditUser";
+            this.btnEditUser.Size = new System.Drawing.Size(100, 30);
+            this.btnEditUser.TabIndex = 1;
+            this.btnEditUser.Text = "Edit User";
+            this.btnEditUser.UseVisualStyleBackColor = true;
+            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
+            // 
+            // btnCloseProgram
+            // 
+            this.btnCloseProgram.Location = new System.Drawing.Point(673, 341);
+            this.btnCloseProgram.Name = "btnCloseProgram";
+            this.btnCloseProgram.Size = new System.Drawing.Size(100, 30);
+            this.btnCloseProgram.TabIndex = 1;
+            this.btnCloseProgram.Text = "Close";
+            this.btnCloseProgram.UseVisualStyleBackColor = true;
+            this.btnCloseProgram.Click += new System.EventHandler(this.btnCloseProgram_Click);
             // 
             // awardsTab
             // 
@@ -166,44 +178,41 @@
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
             // 
-            // btnCloseProgram
+            // Id
             // 
-            this.btnCloseProgram.Location = new System.Drawing.Point(673, 341);
-            this.btnCloseProgram.Name = "btnCloseProgram";
-            this.btnCloseProgram.Size = new System.Drawing.Size(100, 30);
-            this.btnCloseProgram.TabIndex = 1;
-            this.btnCloseProgram.Text = "Close";
-            this.btnCloseProgram.UseVisualStyleBackColor = true;
-            this.btnCloseProgram.Click += new System.EventHandler(this.btnCloseProgram_Click);
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
             // 
-            // btnEditUser
+            // FirstName
             // 
-            this.btnEditUser.Location = new System.Drawing.Point(109, 341);
-            this.btnEditUser.Name = "btnEditUser";
-            this.btnEditUser.Size = new System.Drawing.Size(100, 30);
-            this.btnEditUser.TabIndex = 1;
-            this.btnEditUser.Text = "Edit User";
-            this.btnEditUser.UseVisualStyleBackColor = true;
-            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
+            this.FirstName.DataPropertyName = "FirstName";
+            this.FirstName.HeaderText = "First Name";
+            this.FirstName.Name = "FirstName";
             // 
-            // btnAddUser
+            // LastName
             // 
-            this.btnAddUser.Location = new System.Drawing.Point(3, 341);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(100, 30);
-            this.btnAddUser.TabIndex = 1;
-            this.btnAddUser.Text = "Add";
-            this.btnAddUser.UseVisualStyleBackColor = true;
-            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
+            this.LastName.DataPropertyName = "LastName";
+            this.LastName.HeaderText = "Last Name";
+            this.LastName.Name = "LastName";
             // 
-            // btnRemoveUser
+            // BirthDate
             // 
-            this.btnRemoveUser.Location = new System.Drawing.Point(215, 341);
-            this.btnRemoveUser.Name = "btnRemoveUser";
-            this.btnRemoveUser.Size = new System.Drawing.Size(100, 30);
-            this.btnRemoveUser.TabIndex = 1;
-            this.btnRemoveUser.Text = "Remove";
-            this.btnRemoveUser.UseVisualStyleBackColor = true;
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.HeaderText = "Birth Date";
+            this.BirthDate.Name = "BirthDate";
+            // 
+            // Age
+            // 
+            this.Age.DataPropertyName = "Age";
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            // 
+            // Awards
+            // 
+            this.Awards.DataPropertyName = "Awards";
+            this.Awards.HeaderText = "Awards";
+            this.Awards.Name = "Awards";
             // 
             // MainForm
             // 
@@ -214,7 +223,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Users & Rewards";
+            this.Text = "Users & Awards";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             this.tabMainContainer.ResumeLayout(false);
             this.usersTab.ResumeLayout(false);
@@ -227,11 +236,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvUsers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Age;
         private System.Windows.Forms.TabControl tabMainContainer;
         private System.Windows.Forms.TabPage usersTab;
         private System.Windows.Forms.TabPage awardsTab;
@@ -243,6 +247,12 @@
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.Button btnEditUser;
         private System.Windows.Forms.Button btnRemoveUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Age;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Awards;
     }
 }
 

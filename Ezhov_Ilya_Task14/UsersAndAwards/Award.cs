@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UsersAndAwards
 {
-    class Award
+    public class Award
     {
         public int id { get; set; }
 
