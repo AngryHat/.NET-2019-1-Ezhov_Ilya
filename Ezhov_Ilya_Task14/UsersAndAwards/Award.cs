@@ -44,10 +44,17 @@ namespace UsersAndAwards
             }
         }
 
+        public int GetAwardID()
+        {
+            AwardStorage.AwardIDCounter++;
+            return AwardStorage.AwardIDCounter;
+        }
+
         public Award(string title, string description)
         {
             Title = title;
             Description = description;
+            id = GetAwardID();
         }
     }
 }

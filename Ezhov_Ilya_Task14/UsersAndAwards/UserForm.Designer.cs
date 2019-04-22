@@ -36,6 +36,7 @@
             this.tbBirthdate = new System.Windows.Forms.TextBox();
             this.btnSaveChangesUser = new System.Windows.Forms.Button();
             this.btnCancelUser = new System.Windows.Forms.Button();
+            this.chbxUserAwardsBox = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -44,9 +45,9 @@
             this.lblFirstName.Location = new System.Drawing.Point(19, 19);
             this.lblFirstName.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(57, 13);
+            this.lblFirstName.Size = new System.Drawing.Size(60, 13);
             this.lblFirstName.TabIndex = 0;
-            this.lblFirstName.Text = "First Name";
+            this.lblFirstName.Text = "First Name:";
             // 
             // lblLastName
             // 
@@ -54,9 +55,9 @@
             this.lblLastName.Location = new System.Drawing.Point(19, 52);
             this.lblLastName.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(58, 13);
+            this.lblLastName.Size = new System.Drawing.Size(61, 13);
             this.lblLastName.TabIndex = 0;
-            this.lblLastName.Text = "Last Name";
+            this.lblLastName.Text = "Last Name:";
             // 
             // lblBirthDate
             // 
@@ -64,9 +65,9 @@
             this.lblBirthDate.Location = new System.Drawing.Point(19, 85);
             this.lblBirthDate.Margin = new System.Windows.Forms.Padding(10, 10, 0, 0);
             this.lblBirthDate.Name = "lblBirthDate";
-            this.lblBirthDate.Size = new System.Drawing.Size(54, 13);
+            this.lblBirthDate.Size = new System.Drawing.Size(57, 13);
             this.lblBirthDate.TabIndex = 0;
-            this.lblBirthDate.Text = "Birth Date";
+            this.lblBirthDate.Text = "Birth Date:";
             // 
             // tbFirstName
             // 
@@ -109,11 +110,20 @@
             this.btnCancelUser.Text = "Cancel";
             this.btnCancelUser.UseVisualStyleBackColor = true;
             // 
+            // chbxUserAwardsBox
+            // 
+            this.chbxUserAwardsBox.FormattingEnabled = true;
+            this.chbxUserAwardsBox.Location = new System.Drawing.Point(22, 123);
+            this.chbxUserAwardsBox.Name = "chbxUserAwardsBox";
+            this.chbxUserAwardsBox.Size = new System.Drawing.Size(199, 94);
+            this.chbxUserAwardsBox.TabIndex = 4;
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(253, 289);
+            this.Controls.Add(this.chbxUserAwardsBox);
             this.Controls.Add(this.btnCancelUser);
             this.Controls.Add(this.btnSaveChangesUser);
             this.Controls.Add(this.tbBirthdate);
@@ -143,5 +153,6 @@
         private System.Windows.Forms.TextBox tbBirthdate;
         private System.Windows.Forms.Button btnSaveChangesUser;
         private System.Windows.Forms.Button btnCancelUser;
+        private System.Windows.Forms.CheckedListBox chbxUserAwardsBox;
     }
 }

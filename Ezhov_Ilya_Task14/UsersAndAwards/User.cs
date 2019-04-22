@@ -73,12 +73,43 @@ namespace UsersAndAwards
 
         public List<Award> Awards = new List<Award>();
 
+        public string AwardsToString
+        {
+            get
+            {
+                string output = "No awards, sorry";
+                if (Awards.Count != 0)
+                {
+                    output = "";
+                    int i;
+                    for (i = 0; i < Awards.Count - 1; i++)
+                    {
+                        output += Awards[i].Title + ", ";
+                    }
+                    output += Awards[i].Title;
+                    //foreach (var award in Awards)
+                    //{
+                    //    output += award.Title + ", ";
+                    //}
+                }
+                return output;
+            }
+        }
+
+        public int GetUserID()
+        {
+            UserStorage.UserIDCounter++;
+            return UserStorage.UserIDCounter;
+        }
+
+
         public User()
         {
         }
 
         public User(string fname, string lname, DateTime bdate)
         {
+            id = GetUserID();
             FirstName = fname;
             LastName = lname;
             BirthDate = bdate;
@@ -86,11 +117,11 @@ namespace UsersAndAwards
 
         public User(string fname, string lname, DateTime bdate, List<Award> awards)
         {
+            id = GetUserID();
             FirstName = fname;
             LastName = lname;
             BirthDate = bdate;
             Awards = awards;
         }
-
     }
 }
