@@ -21,6 +21,7 @@ namespace UsersAndAwards
         public UserForm()
         {
             InitializeComponent();
+            AutoValidate = AutoValidate.Disable;
         }
 
         public UserForm(User userInWork)
@@ -31,7 +32,6 @@ namespace UsersAndAwards
             LastName = userInWork.LastName;
             BirthDate = userInWork.BirthDate;
             Awards = userInWork.Awards;
-
             AutoValidate = AutoValidate.Disable;
         }
 
@@ -39,7 +39,7 @@ namespace UsersAndAwards
         {
             tbFirstName.Text = FirstName;
             tbLastName.Text = LastName;
-            tbBirthdate.Text = BirthDate.ToShortDateString();
+            tbBirthDate.Text = BirthDate.ToShortDateString();
             // creating awards list
             foreach (var award in AwardStorage.awardsList)
             {
@@ -63,13 +63,8 @@ namespace UsersAndAwards
 
         private void btnSaveChangesUser_Click(object sender, EventArgs e)
         {
-            DialogResult = ValidateChildren() ? DialogResult.OK : DialogResult.Cancel;
-            FirstName = tbFirstName.Text.Trim();
-            LastName = tbLastName.Text.Trim();
-            BirthDate = DateTime.Parse(tbBirthdate.Text.Trim());
-            //DialogResult = DialogResult.OK;
+            DialogResult = ValidateChildren() ? DialogResult.OK : DialogResult.None;
 
-            //adding awards to user by checkbox
             Awards = new List<Award>();
             foreach (var award in AwardStorage.awardsList)
             {
@@ -83,23 +78,66 @@ namespace UsersAndAwards
             }
         }
 
-        private void FirstName_Validating(object sender, EventArgs e)
-        {
 
-        }
-
+        //Validating
         private void FirstName_Validated(object sender, EventArgs e)
         {
             FirstName = tbFirstName.Text.Trim();
-
+        }
+        private void FirstName_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbFirstName.TextLength == 0 || tbFirstName.TextLength > 50)
+            {
+                errorProviderUF.SetError(tbFirstName, "Name can't be empty or contains more than 50 symbols.");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProviderUF.SetError(tbFirstName, String.Empty);
+                e.Cancel = false;
+            }
         }
 
-        private void tbFirstName_Validating(object sender, CancelEventArgs e)
+        private void LastName_Validated(object sender, EventArgs e)
         {
-            e.Cancel = true;
-            errorProvider.SetError(tbFirstName, "Name can't be empty");
+            LastName = tbLastName.Text.Trim();
+        }
+        private void LastName_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbLastName.TextLength == 0 || tbLastName.TextLength > 50)
+            {
+                errorProviderUF.SetError(tbLastName, "Last Name can't be empty or contains more than 50 symbols.");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProviderUF.SetError(tbLastName, String.Empty);
+                e.Cancel = false;
+            }
+        }
 
-            errorProvider.SetError(tbFirstName, string.Empty);
+        private void BirthDate_Validated(object sender, EventArgs e)
+        {
+            BirthDate = DateTime.Parse(tbBirthDate.Text.Trim());
+        }
+        private void BirthDate_Validating(object sender, CancelEventArgs e)
+        {
+            if (!DateTime.TryParse(tbBirthDate.Text.Trim(), out DateTime parsedBithDate) || parsedBithDate.Year < DateTime.Now.Year - 150 || parsedBithDate.Year > DateTime.Now.Year)
+            {
+                errorProviderUF.SetError(tbBirthDate, "Incorrect date input. Age can't be more than 150, and less than 0.");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProviderUF.SetError(tbBirthDate, String.Empty);
+                e.Cancel = false;
+            }
+        }
+
+        //Cancel button
+        private void btnCancelUser_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

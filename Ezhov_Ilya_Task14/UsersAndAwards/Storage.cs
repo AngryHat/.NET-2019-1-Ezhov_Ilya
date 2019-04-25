@@ -17,9 +17,9 @@ namespace UsersAndAwards
     {
         public static List<User> usersList = new List<User>();
 
-        public static void Add()
+        public static void Add(string fName, string lName, DateTime bDate, List<Award> awards)
         {
-            usersList.Add(new User("new", "new", DateTime.Parse("2000.01.01")));
+            usersList.Add(new User(fName, lName, bDate, awards));
         }
 
         public static int UserIDCounter = 0;
@@ -29,9 +29,9 @@ namespace UsersAndAwards
     {
         public static List<Award> awardsList = new List<Award>();
 
-        public static void Add()
+        public static void Add(string title, string description)
         {
-            awardsList.Add(new Award("new", "new"));
+            awardsList.Add(new Award(title, description));
         }
 
         public static int AwardIDCounter = 0;

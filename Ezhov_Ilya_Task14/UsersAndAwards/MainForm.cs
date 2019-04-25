@@ -19,26 +19,27 @@ namespace UsersAndAwards
 
         List<User> usersList = UserStorage.usersList;
         List<Award> awardsList = AwardStorage.awardsList;
-        
+
         public MainForm()
         {
             // adding some users
-            usersList.Add(new User("Ivan", "Ruka", DateTime.Parse("1989.11.23", null)));
-            usersList.Add(new User("Roman", "Zhukov", DateTime.Parse("1999.02.11", null)));
-            usersList.Add(new User("Alena", "Apina", DateTime.Parse("1987.03.08", null)));
-            usersList.Add(new User("Vasyliy", "Erohin", DateTime.Parse("1963.08.14", null)));
+            UserStorage.Add("Ivan", "Ruka", DateTime.Parse("1989.11.23"), null);
+            UserStorage.Add("Roman", "Zhukov", DateTime.Parse("1999.02.11"), null);
+            UserStorage.Add("Alena", "Apina", DateTime.Parse("1987.03.08"), null);
+            UserStorage.Add("Vasyliy", "Erohin", DateTime.Parse("1963.08.14"), null);
 
             // adding some awards
-            awardsList.Add(new Award("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!"));
-            awardsList.Add(new Award("Oscar", "Wow! You acted awesome in that movie, but of course, yuo already know it."));
-           
+            AwardStorage.Add("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!");
+            AwardStorage.Add("Oscar", "Wow! You acted awesome in that movie, but of course, you already know it.");
+
             InitializeComponent();
             dgvUsers.AutoGenerateColumns = false;
             dgvUsers.DataSource = usersList;
             dgvAwards.AutoGenerateColumns = false;
             dgvAwards.DataSource = awardsList;
 
-            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            dgvAwards.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
         }
 
         private void gdvMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -113,20 +114,19 @@ namespace UsersAndAwards
         private void btnAddUser_Click(object sender, EventArgs e)
         {
             UserForm userForm = new UserForm();
-            //userForm.Show();
 
             if (userForm.ShowDialog(this) == DialogResult.OK)
             {
                 User newUser = new User(userForm.FirstName, userForm.LastName, userForm.BirthDate, userForm.Awards);
-                //newUser.FirstName = userForm.FirstName;
-                //newUser.LastName = userForm.LastName;
-                //newUser.BirthDate = userForm.BirthDate;
-                //newUser.Awards = userForm.Awards;
                 newUser.id = newUser.GetUserID();
 
                 usersList.Add(newUser);
             }
             RefreshUsersGrid();
+        }
+        private void mmUserAdd_Click(object sender, EventArgs e)
+        {
+            btnAddUser_Click(sender, e);
         }
 
         private void btnAddAward_Click(object sender, EventArgs e)
@@ -140,6 +140,10 @@ namespace UsersAndAwards
                 awardsList.Add(newAward);
             }
             RefreshAwardsGrid();
+        }
+        private void mmAwardAdd_Click(object sender, EventArgs e)
+        {
+            btnAddAward_Click(sender, e);
         }
 
         //EDIT BUTTONS
@@ -161,6 +165,11 @@ namespace UsersAndAwards
                 RefreshUsersGrid();
             }
         }
+        private void mmUserEdit_Click(object sender, EventArgs e)
+        {
+            btnEditUser_Click(sender, e);
+        }
+
         private void btnEditAward_Click(object sender, EventArgs e)
         {
             if (dgvAwards.SelectedCells.Count == 1)
@@ -176,7 +185,10 @@ namespace UsersAndAwards
                 }
                 RefreshAwardsGrid();
             }
-
+        }
+        private void mmAwardEdit_Click(object sender, EventArgs e)
+        {
+            btnEditAward_Click(sender, e);
         }
 
         //REMOVE BUTTONS
@@ -194,6 +206,11 @@ namespace UsersAndAwards
             }
             RefreshUsersGrid();
         }
+        private void mmUserRemove_Click(object sender, EventArgs e)
+        {
+            btnRemoveUser_Click(sender, e);
+        }
+
         private void btnRemoveAward_Click(object sender, EventArgs e)
         {
             if (dgvAwards.SelectedCells.Count == 1)
@@ -213,29 +230,24 @@ namespace UsersAndAwards
             RefreshUsersGrid();
             RefreshAwardsGrid();
         }
+        private void mmAwardRemove_Click(object sender, EventArgs e)
+        {
+            btnRemoveAward_Click(sender, e);
+        }
 
+        //CLOSE BUTTONS
         private void btnCloseProgramUS_Click(object sender, EventArgs e)
         {
             Close();
         }
-
         private void btnCloseProgramAW_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-
-
-
-
-
-
-        /* PROBLEMS:
-         * Award column changes it's name after adding awards
-         * IDK how to hide unnecessary tabs
-         * LEFT TO DO:
-         * validation
-         */
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
 

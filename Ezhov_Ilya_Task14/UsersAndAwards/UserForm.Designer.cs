@@ -34,12 +34,12 @@
             this.lblBirthDate = new System.Windows.Forms.Label();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.tbLastName = new System.Windows.Forms.TextBox();
-            this.tbBirthdate = new System.Windows.Forms.TextBox();
+            this.tbBirthDate = new System.Windows.Forms.TextBox();
             this.btnSaveChangesUser = new System.Windows.Forms.Button();
             this.btnCancelUser = new System.Windows.Forms.Button();
             this.chbxUserAwardsBox = new System.Windows.Forms.CheckedListBox();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.errorProviderUF = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderUF)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -78,7 +78,7 @@
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(122, 20);
             this.tbFirstName.TabIndex = 1;
-            this.tbFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.tbFirstName_Validating);
+            this.tbFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.FirstName_Validating);
             this.tbFirstName.Validated += new System.EventHandler(this.FirstName_Validated);
             // 
             // tbLastName
@@ -87,13 +87,17 @@
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(122, 20);
             this.tbLastName.TabIndex = 1;
+            this.tbLastName.Validating += new System.ComponentModel.CancelEventHandler(this.LastName_Validating);
+            this.tbLastName.Validated += new System.EventHandler(this.LastName_Validated);
             // 
-            // tbBirthdate
+            // tbBirthDate
             // 
-            this.tbBirthdate.Location = new System.Drawing.Point(99, 82);
-            this.tbBirthdate.Name = "tbBirthdate";
-            this.tbBirthdate.Size = new System.Drawing.Size(73, 20);
-            this.tbBirthdate.TabIndex = 1;
+            this.tbBirthDate.Location = new System.Drawing.Point(99, 82);
+            this.tbBirthDate.Name = "tbBirthDate";
+            this.tbBirthDate.Size = new System.Drawing.Size(73, 20);
+            this.tbBirthDate.TabIndex = 1;
+            this.tbBirthDate.Validating += new System.ComponentModel.CancelEventHandler(this.BirthDate_Validating);
+            this.tbBirthDate.Validated += new System.EventHandler(this.BirthDate_Validated);
             // 
             // btnSaveChangesUser
             // 
@@ -114,6 +118,7 @@
             this.btnCancelUser.TabIndex = 3;
             this.btnCancelUser.Text = "Cancel";
             this.btnCancelUser.UseVisualStyleBackColor = true;
+            this.btnCancelUser.Click += new System.EventHandler(this.btnCancelUser_Click);
             // 
             // chbxUserAwardsBox
             // 
@@ -123,10 +128,10 @@
             this.chbxUserAwardsBox.Size = new System.Drawing.Size(199, 94);
             this.chbxUserAwardsBox.TabIndex = 4;
             // 
-            // errorProvider
+            // errorProviderUF
             // 
-            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
-            this.errorProvider.ContainerControl = this;
+            this.errorProviderUF.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderUF.ContainerControl = this;
             // 
             // UserForm
             // 
@@ -136,7 +141,7 @@
             this.Controls.Add(this.chbxUserAwardsBox);
             this.Controls.Add(this.btnCancelUser);
             this.Controls.Add(this.btnSaveChangesUser);
-            this.Controls.Add(this.tbBirthdate);
+            this.Controls.Add(this.tbBirthDate);
             this.Controls.Add(this.tbLastName);
             this.Controls.Add(this.tbFirstName);
             this.Controls.Add(this.lblBirthDate);
@@ -148,7 +153,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add/Edit User";
             this.Load += new System.EventHandler(this.Form_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderUF)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,10 +166,10 @@
         private System.Windows.Forms.Label lblBirthDate;
         private System.Windows.Forms.TextBox tbFirstName;
         private System.Windows.Forms.TextBox tbLastName;
-        private System.Windows.Forms.TextBox tbBirthdate;
+        private System.Windows.Forms.TextBox tbBirthDate;
         private System.Windows.Forms.Button btnSaveChangesUser;
         private System.Windows.Forms.Button btnCancelUser;
         private System.Windows.Forms.CheckedListBox chbxUserAwardsBox;
-        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ErrorProvider errorProviderUF;
     }
 }

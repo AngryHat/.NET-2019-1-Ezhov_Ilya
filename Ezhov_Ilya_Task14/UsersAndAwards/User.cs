@@ -71,7 +71,7 @@ namespace UsersAndAwards
             }
         }
 
-        public List<Award> Awards = new List<Award>();
+        public List<Award> Awards;
 
         public string AwardsToString
         {
@@ -81,19 +81,13 @@ namespace UsersAndAwards
                 if (Awards.Count != 0)
                 {
                     output = "";
-                    int i;
-                    for (i = 0; i < Awards.Count - 1; i++)
+                    List<string> awardsTitles = new List<string>();
+                    foreach (Award award in Awards)
                     {
-                        output += Awards[i].Title + ", ";
+                        awardsTitles.Add(award.Title);
                     }
-                    output += Awards[i].Title;
-                    //foreach (var award in Awards)
-                    //{
-                    //    output += award.Title + ", ";
-                    //}
+                    output = String.Join(", ", awardsTitles);
                 }
-
-                //string.Join(", ", ); //вместо аутпуда для стринга
                 return output;
             }
         }
@@ -123,7 +117,7 @@ namespace UsersAndAwards
             FirstName = fname;
             LastName = lname;
             BirthDate = bdate;
-            Awards = awards;
+            Awards = awards ?? new List<Award>();
         }
     }
 }

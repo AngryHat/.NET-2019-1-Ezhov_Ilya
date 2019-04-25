@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.lblDescription = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.btnCancelUser = new System.Windows.Forms.Button();
             this.btnSaveChangesUser = new System.Windows.Forms.Button();
+            this.errorProviderAF = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderAF)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -52,6 +55,8 @@
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(122, 20);
             this.tbTitle.TabIndex = 2;
+            this.tbTitle.Validating += new System.ComponentModel.CancelEventHandler(this.Title_Validating);
+            this.tbTitle.Validated += new System.EventHandler(this.Title_Validated);
             // 
             // lblDescription
             // 
@@ -70,6 +75,8 @@
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(199, 145);
             this.tbDescription.TabIndex = 2;
+            this.tbDescription.Validating += new System.ComponentModel.CancelEventHandler(this.Descrition_Validating);
+            this.tbDescription.Validated += new System.EventHandler(this.Descrition_Validated);
             // 
             // btnCancelUser
             // 
@@ -91,6 +98,11 @@
             this.btnSaveChangesUser.UseVisualStyleBackColor = true;
             this.btnSaveChangesUser.Click += new System.EventHandler(this.btnSaveChangesUser_Click);
             // 
+            // errorProviderAF
+            // 
+            this.errorProviderAF.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProviderAF.ContainerControl = this;
+            // 
             // AwardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -107,6 +119,7 @@
             this.Name = "AwardForm";
             this.Text = "Add/Edit Award";
             this.Load += new System.EventHandler(this.Form_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderAF)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,5 +133,6 @@
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Button btnCancelUser;
         private System.Windows.Forms.Button btnSaveChangesUser;
+        private System.Windows.Forms.ErrorProvider errorProviderAF;
     }
 }
