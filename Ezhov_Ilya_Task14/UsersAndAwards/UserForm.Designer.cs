@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblFirstName = new System.Windows.Forms.Label();
             this.lblLastName = new System.Windows.Forms.Label();
             this.lblBirthDate = new System.Windows.Forms.Label();
@@ -37,6 +38,8 @@
             this.btnSaveChangesUser = new System.Windows.Forms.Button();
             this.btnCancelUser = new System.Windows.Forms.Button();
             this.chbxUserAwardsBox = new System.Windows.Forms.CheckedListBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFirstName
@@ -75,6 +78,8 @@
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(122, 20);
             this.tbFirstName.TabIndex = 1;
+            this.tbFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.tbFirstName_Validating);
+            this.tbFirstName.Validated += new System.EventHandler(this.FirstName_Validated);
             // 
             // tbLastName
             // 
@@ -118,6 +123,11 @@
             this.chbxUserAwardsBox.Size = new System.Drawing.Size(199, 94);
             this.chbxUserAwardsBox.TabIndex = 4;
             // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,6 +148,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add/Edit User";
             this.Load += new System.EventHandler(this.Form_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +165,6 @@
         private System.Windows.Forms.Button btnSaveChangesUser;
         private System.Windows.Forms.Button btnCancelUser;
         private System.Windows.Forms.CheckedListBox chbxUserAwardsBox;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

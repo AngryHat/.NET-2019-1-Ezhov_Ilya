@@ -31,6 +31,8 @@ namespace UsersAndAwards
             LastName = userInWork.LastName;
             BirthDate = userInWork.BirthDate;
             Awards = userInWork.Awards;
+
+            AutoValidate = AutoValidate.Disable;
         }
 
         private void Form_Load(object sender, EventArgs e)
@@ -61,10 +63,11 @@ namespace UsersAndAwards
 
         private void btnSaveChangesUser_Click(object sender, EventArgs e)
         {
+            DialogResult = ValidateChildren() ? DialogResult.OK : DialogResult.Cancel;
             FirstName = tbFirstName.Text.Trim();
             LastName = tbLastName.Text.Trim();
             BirthDate = DateTime.Parse(tbBirthdate.Text.Trim());
-            DialogResult = DialogResult.OK;
+            //DialogResult = DialogResult.OK;
 
             //adding awards to user by checkbox
             Awards = new List<Award>();
@@ -80,5 +83,23 @@ namespace UsersAndAwards
             }
         }
 
+        private void FirstName_Validating(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FirstName_Validated(object sender, EventArgs e)
+        {
+            FirstName = tbFirstName.Text.Trim();
+
+        }
+
+        private void tbFirstName_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            errorProvider.SetError(tbFirstName, "Name can't be empty");
+
+            errorProvider.SetError(tbFirstName, string.Empty);
+        }
     }
 }

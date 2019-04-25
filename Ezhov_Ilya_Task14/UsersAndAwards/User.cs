@@ -15,7 +15,7 @@ namespace UsersAndAwards
         {
             get
             {
-                return _firstName ?? "Unknown first name";
+                return _firstName;
             }
             set
             {
@@ -31,7 +31,7 @@ namespace UsersAndAwards
         {
             get
             {
-                return _lastName ?? "Unknown last name";
+                return _lastName;
             }
             set
             {
@@ -92,6 +92,8 @@ namespace UsersAndAwards
                     //    output += award.Title + ", ";
                     //}
                 }
+
+                //string.Join(", ", ); //вместо аутпуда для стринга
                 return output;
             }
         }

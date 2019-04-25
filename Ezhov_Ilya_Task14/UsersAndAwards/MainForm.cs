@@ -31,10 +31,14 @@ namespace UsersAndAwards
             // adding some awards
             awardsList.Add(new Award("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!"));
             awardsList.Add(new Award("Oscar", "Wow! You acted awesome in that movie, but of course, yuo already know it."));
-
+           
             InitializeComponent();
+            dgvUsers.AutoGenerateColumns = false;
             dgvUsers.DataSource = usersList;
+            dgvAwards.AutoGenerateColumns = false;
             dgvAwards.DataSource = awardsList;
+
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void gdvMain_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -192,7 +196,22 @@ namespace UsersAndAwards
         }
         private void btnRemoveAward_Click(object sender, EventArgs e)
         {
-
+            if (dgvAwards.SelectedCells.Count == 1)
+            {
+                var confirmRemove = MessageBox.Show("You are going to remove selected award. Are you sure?", "Confirm the action:",
+                                     MessageBoxButtons.YesNo);
+                if (confirmRemove == DialogResult.Yes)
+                {
+                    Award award = (Award)dgvAwards.SelectedCells[0].OwningRow.DataBoundItem;
+                    awardsList.Remove(award);
+                    foreach (User user in usersList)
+                    {
+                        user.Awards.Remove(award);
+                    }
+                }
+            }
+            RefreshUsersGrid();
+            RefreshAwardsGrid();
         }
 
         private void btnCloseProgramUS_Click(object sender, EventArgs e)
@@ -215,8 +234,6 @@ namespace UsersAndAwards
          * Award column changes it's name after adding awards
          * IDK how to hide unnecessary tabs
          * LEFT TO DO:
-         * award creating editing form
-         * deleting award deletes it from every user
          * validation
          */
     }

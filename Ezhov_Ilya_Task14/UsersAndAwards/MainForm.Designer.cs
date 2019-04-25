@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvUsers = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Awards = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabMainContainer = new System.Windows.Forms.TabControl();
             this.usersTab = new System.Windows.Forms.TabPage();
             this.btnRemoveUser = new System.Windows.Forms.Button();
@@ -47,6 +41,12 @@
             this.btnAddAward = new System.Windows.Forms.Button();
             this.btnEditAward = new System.Windows.Forms.Button();
             this.dgvAwards = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Age = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Awards = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AwardsId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,45 +70,10 @@
             this.dgvUsers.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvUsers.Location = new System.Drawing.Point(3, 3);
             this.dgvUsers.Name = "dgvUsers";
+            this.dgvUsers.RowHeadersVisible = false;
             this.dgvUsers.Size = new System.Drawing.Size(770, 332);
             this.dgvUsers.TabIndex = 0;
             this.dgvUsers.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gdvMain_ColumnHeaderMouseClick);
-            // 
-            // Id
-            // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "ID";
-            this.Id.Name = "Id";
-            // 
-            // FirstName
-            // 
-            this.FirstName.DataPropertyName = "FirstName";
-            this.FirstName.HeaderText = "First Name";
-            this.FirstName.Name = "FirstName";
-            // 
-            // LastName
-            // 
-            this.LastName.DataPropertyName = "LastName";
-            this.LastName.HeaderText = "Last Name";
-            this.LastName.Name = "LastName";
-            // 
-            // BirthDate
-            // 
-            this.BirthDate.DataPropertyName = "BirthDate";
-            this.BirthDate.HeaderText = "Birth Date";
-            this.BirthDate.Name = "BirthDate";
-            // 
-            // Age
-            // 
-            this.Age.DataPropertyName = "Age";
-            this.Age.HeaderText = "Age";
-            this.Age.Name = "Age";
-            // 
-            // Awards
-            // 
-            this.Awards.DataPropertyName = "AwardsToString";
-            this.Awards.HeaderText = "Awards";
-            this.Awards.Name = "Awards";
             // 
             // tabMainContainer
             // 
@@ -123,11 +88,11 @@
             // 
             // usersTab
             // 
+            this.usersTab.Controls.Add(this.dgvUsers);
             this.usersTab.Controls.Add(this.btnRemoveUser);
             this.usersTab.Controls.Add(this.btnAddUser);
             this.usersTab.Controls.Add(this.btnEditUser);
             this.usersTab.Controls.Add(this.btnCloseProgramUS);
-            this.usersTab.Controls.Add(this.dgvUsers);
             this.usersTab.Location = new System.Drawing.Point(4, 22);
             this.usersTab.Name = "usersTab";
             this.usersTab.Padding = new System.Windows.Forms.Padding(3);
@@ -244,23 +209,67 @@
             this.dgvAwards.Size = new System.Drawing.Size(770, 332);
             this.dgvAwards.TabIndex = 1;
             // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
+            this.Id.Width = 30;
+            // 
+            // FirstName
+            // 
+            this.FirstName.DataPropertyName = "FirstName";
+            this.FirstName.HeaderText = "First Name";
+            this.FirstName.Name = "FirstName";
+            this.FirstName.Width = 140;
+            // 
+            // LastName
+            // 
+            this.LastName.DataPropertyName = "LastName";
+            this.LastName.HeaderText = "Last Name";
+            this.LastName.Name = "LastName";
+            this.LastName.Width = 140;
+            // 
+            // BirthDate
+            // 
+            this.BirthDate.DataPropertyName = "BirthDate";
+            this.BirthDate.HeaderText = "Birth Date";
+            this.BirthDate.Name = "BirthDate";
+            // 
+            // Age
+            // 
+            this.Age.DataPropertyName = "Age";
+            this.Age.HeaderText = "Age";
+            this.Age.Name = "Age";
+            this.Age.Width = 50;
+            // 
+            // Awards
+            // 
+            this.Awards.DataPropertyName = "AwardsToString";
+            this.Awards.HeaderText = "Awards";
+            this.Awards.Name = "Awards";
+            this.Awards.Width = 265;
+            // 
             // AwardsId
             // 
             this.AwardsId.DataPropertyName = "Id";
             this.AwardsId.HeaderText = "ID";
             this.AwardsId.Name = "AwardsId";
+            this.AwardsId.Width = 30;
             // 
             // Title
             // 
             this.Title.DataPropertyName = "Title";
             this.Title.HeaderText = "Title";
             this.Title.Name = "Title";
+            this.Title.Width = 150;
             // 
             // Description
             // 
             this.Description.DataPropertyName = "Description";
             this.Description.HeaderText = "Description";
             this.Description.Name = "Description";
+            this.Description.Width = 545;
             // 
             // MainForm
             // 
@@ -288,23 +297,23 @@
         private System.Windows.Forms.TabPage usersTab;
         private System.Windows.Forms.TabPage awardsTab;
         private System.Windows.Forms.DataGridView dgvAwards;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AwardsId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
         private System.Windows.Forms.Button btnCloseProgramUS;
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.Button btnEditUser;
         private System.Windows.Forms.Button btnRemoveUser;
+        private System.Windows.Forms.Button btnCloseProgramAW;
+        private System.Windows.Forms.Button btnRemoveAward;
+        private System.Windows.Forms.Button btnAddAward;
+        private System.Windows.Forms.Button btnEditAward;
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn FirstName;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastName;
         private System.Windows.Forms.DataGridViewTextBoxColumn BirthDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Age;
         private System.Windows.Forms.DataGridViewTextBoxColumn Awards;
-        private System.Windows.Forms.Button btnCloseProgramAW;
-        private System.Windows.Forms.Button btnRemoveAward;
-        private System.Windows.Forms.Button btnAddAward;
-        private System.Windows.Forms.Button btnEditAward;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AwardsId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
     }
 }
 
