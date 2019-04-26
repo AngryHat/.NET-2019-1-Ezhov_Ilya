@@ -4,58 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static Task3.Program;
 
 namespace Task3
 {
+    class Event
+    {
+        public delegate void SortingDone();
+        private event SortingDone SortingDoneEvent;
+
+        public Event()
+        {
+            SortingDoneEvent += EndSignal;
+        }
+
+        public void EndThread()
+        {
+            SortingDoneEvent?.Invoke();
+        }
+
+        private static void EndSignal()
+        {
+            Console.WriteLine("!!! Sorting is done in own thread.\n");
+        }
+    }
+
     class Program
     {
         public delegate bool compareDelegate(string str1, string str2);
         public static compareDelegate compareDel;
 
-        public delegate void delegateThread();
-        public static delegateThread myDelThread;
-
-        public static string[] inputThread;
-        public static bool ThreadSoryingDone = false;
+        
 
         static void Main(string[] args)
         {
             string[] input = { "abbaaaa", "ccc", "a", "aba", "ab", "caabaa", "abb", "aaaabaa", "ac", "b", "abaaaba", "c", "caabba", "aaabba", "aa" };
-            inputThread = input;
-            myDelThread = SortArrayThread;
-            
+            object inputObj = input;
+
 
             Console.WriteLine("This program sort array of strings and uses delegate to compare strings." +
                 "\nAlso sorting executing in it's own thread." +
-                $"\n\nOriginal arrays is: ");
-            int count = 0;
-            foreach (var item in input)
-            {
-                Console.WriteLine($"[{count}] = {item}");
-                count++;
-            }
-            Console.WriteLine("\n\n");
-            
-            StartSortingThread();
-            while (!ThreadSoryingDone)
-            {
-                Thread.Sleep(50);
-            }
+                $"\n\nOriginal arrays is:\n");
+            ShowArray(input);
+            SortArrayNewThread(inputObj);
+            Console.WriteLine("Sorted array is:\n");
+            ShowArray(input);
 
-            Console.WriteLine("Sorted arrays is: ");
-            count = 0;
-            foreach (var item in input)
-            {
-                Console.WriteLine($"[{count}] = {item}");
-                count++;
-            }
-            Console.WriteLine("\n\n");
 
+            Console.WriteLine("End of program. Press any key.");
             Console.ReadKey();
         }
 
-        public static void SortArray(string[] stringArray)
+        public static void SortArray(object sortingObject)
         {
+            string[] stringArray = (string[])sortingObject;
+
             for (int i = 0; i < stringArray.Length; i++)
             {
                 for (int j = i; j < stringArray.Length; j++)
@@ -70,20 +73,25 @@ namespace Task3
             }
         }
 
-        public static void StartSortingThread()
+        public static void SortArrayNewThread(object sortingObject)
         {
-            Thread thread = new Thread(new ThreadStart(SortArrayThread));
-            thread.Start();
-        }
-        public static void SortArrayThread()
-        {
-            Console.WriteLine("Sorting thread started.");
-            SortArray(inputThread);
-            ThreadSoryingDone = true;
-            Console.WriteLine("Sorting thread ended.");
+            string[] stringArray = (string[])sortingObject;
 
+            Thread thread = new Thread(new ParameterizedThreadStart(SortArray));
+            thread.Start(stringArray);
+            SortArray(stringArray);
+
+            Event @event = new Event();
+            while (true)
+            {
+                if (!thread.IsAlive)
+                {
+                    @event.EndThread();
+                    return;
+                }
+            }
         }
-        
+
         public static void SwapElements(string[] arr, int index, int index2)
         {
             string temp = arr[index2];
@@ -104,6 +112,17 @@ namespace Task3
             {
                 return false;
             }
+        }
+
+        public static void ShowArray(string[] input)
+        {
+            int count = 0;
+            foreach (var item in input)
+            {
+                Console.WriteLine($"[{count}] = {item}");
+                count++;
+            }
+            Console.WriteLine("\n\n");
         }
     }
 }
