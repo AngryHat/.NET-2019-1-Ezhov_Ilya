@@ -8,7 +8,7 @@ namespace Task2
 {
     //  2 dels for person
     public delegate void PersonCome(Person p, int time);
-    public delegate void personLeave(Person p);
+    public delegate void PersonLeave(Person p);
     public delegate void Greetings(Person anotherPerson, int time);
     public delegate void Goodbyes(Person anotherPerson);
 
@@ -16,7 +16,7 @@ namespace Task2
     public class Person
     {
         public event PersonCome OnCome;
-        public event personLeave OnLeave;
+        public event PersonLeave OnLeave;
 
 
         public string Name { get; set; }

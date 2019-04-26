@@ -19,7 +19,7 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            int numberOfPeople = 13;
+            int numberOfPeople = 211;
             Console.WriteLine($"This program removes every second element from list and linked list. Number of elements in collections is {numberOfPeople}.");
 
             List<Person> peopleList = new List<Person>();

@@ -84,7 +84,7 @@ namespace Task3
 
         public override int GetHashCode()
         {
-            return (x << 3) ^ (y << 1);
+            return (x << 3) ^ (y << 5);
         }
     }
 

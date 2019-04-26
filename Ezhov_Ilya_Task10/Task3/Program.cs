@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    // ПЕРЕДЕЛАТЬ ЧЕРЕЗ ИВЕНТ
     class Program
     {
-        public delegate int delegateSimple(string str1, string str2);
-        public static delegateSimple myDelegate;
+        public delegate bool compareDelegate(string str1, string str2);
+        public static compareDelegate compareDel;
+
         public delegate void delegateThread();
         public static delegateThread myDelThread;
 
@@ -60,12 +60,9 @@ namespace Task3
             {
                 for (int j = i; j < stringArray.Length; j++)
                 {
-                    myDelegate = new delegateSimple(CompareStrings);
-                    if (myDelegate(stringArray[i], stringArray[j]) == 1)
-                    {
-                        SwapElements(stringArray, i, j);
-                    }
-                    if (myDelegate(stringArray[i], stringArray[j]) == 2)
+                    compareDel = new compareDelegate(CompareStrings);
+                    bool result = compareDel(stringArray[i], stringArray[j]);
+                    if (result)
                     {
                         SwapElements(stringArray, i, j);
                     }
@@ -93,19 +90,19 @@ namespace Task3
             arr[index2] = arr[index];
             arr[index] = temp;
         }
-        public static int CompareStrings(string str1, string str2)
+        public static bool CompareStrings(string str1, string str2)
         {
             if (str1.Length > str2.Length)
             {
-                return 1;
+                return true;
             }
             if (str1.Length == str2.Length && string.Compare(str1, str2) == 1)
             {
-                return 2;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
     }

@@ -10,56 +10,58 @@ namespace Task1
 
     public class SortDirection
     {
-        public static int Ascending(string str1, string str2)
+        public static bool Ascending(string str1, string str2)
         {
             if (str1.Length > str2.Length)
             {
-                return 0;
+                return true;
             }
             if (str1.Length == str2.Length && string.Compare(str1, str2) == 1)
             {
-                return 1;
+                return true;
             }
             else
             {
-                return -1;
+                return false;
             }
         }
 
-        public static int Descending(string str1, string str2)
+        public static bool Descending(string str1, string str2)
         {
             if (str1.Length < str2.Length)
             {
-                return 0;
+                return true;
             }
             if (str1.Length == str2.Length && string.Compare(str2, str1) == 1)
             {
-                return 1;
+                return true;
             }
             else
             {
-                return -1;
+                return false;
             }
         }
     }
 
     class Program
     {
-        public delegate int del(string str1, string str2);
+        public delegate bool del(string str1, string str2);
         public static del orderDelegate;
 
         static void Main(string[] args)
         {
             string[] input = { "abbaaaa", "ccc", "a", "aba", "ab", "caabaa", "abb", "aaaabaa", "ac", "b", "abaaaba", "c", "caabba", "aaabba", "aa" };
 
-            Console.WriteLine("This program sort array of strings and uses delegate to compare strings." +
-                $"\n\nOriginal arrays is: ");
+            Console.WriteLine("This program sort array of strings and uses delegate to compare strings.\n\n" +
+                $"Original arrays is:\n");
 
             ShowArray(input);
-            orderDelegate = new del(SortDirection.Descending);
+            orderDelegate = new del(SortDirection.Ascending);
+            Console.WriteLine("Sorted array is:\n");
             SortArray(input);
             ShowArray(input);
-            
+
+            Console.WriteLine("End of program. Press any key.");
             Console.ReadKey();
         }
 
@@ -70,11 +72,7 @@ namespace Task1
             {
                 for (int j = i; j < stringArray.Length; j++)
                 {
-                    if (orderDelegate(stringArray[i], stringArray[j]) == 0)
-                    {
-                        SwapElements(stringArray, i, j);
-                    }
-                    if (orderDelegate(stringArray[i], stringArray[j]) == 1)
+                    if (orderDelegate(stringArray[i], stringArray[j]))
                     {
                         SwapElements(stringArray, i, j);
                     }
@@ -98,31 +96,6 @@ namespace Task1
             }
             Console.WriteLine("\n\n");
         }
-
-        // Not used working methods
-        //
-        //public static bool CompareStringsByLength(string str1, string str2)
-        //{
-        //    if (str1.Length > str2.Length)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-        //public static bool CompareStringsByAlphabet(string str1, string str2)
-        //{
-        //    if (str1.Length == str2.Length && string.Compare(str1, str2) == 1)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
     }
 }
 
