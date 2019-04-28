@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using User_Defined_Exceptions;
 
 namespace Task1
 {
@@ -18,6 +19,16 @@ namespace Task1
 
         public override void Deposit(decimal amount)
         {
+            if (amount <= 0)
+            {
+                throw new NonPositiveDepositAmountException("You can not deposit amount less than zero");
+            }
+
+            if (amount >= MaxDepositAmount)
+            {
+                throw new MaxDepositAmountException(string.Format("You can not deposit amount greater than {0}", MaxDepositAmount.ToString()));
+            }
+
             AccountBalance = AccountBalance + amount;
             TransactionSummary = string.Format("{0}\n Deposit:{1}", TransactionSummary, amount);
         }
@@ -26,7 +37,7 @@ namespace Task1
         {
             if (AccountBalance - amount <= MinAccountBalance)
             {
-                throw new Exception("You can not withdraw amount from your Current Account as Minimum Balance limit is reached");
+                throw new MinBalanceReachedException("You can not withdraw amount from your Current Account as Minimum Balance limit is reached");
             }
 
             AccountBalance = AccountBalance - amount;

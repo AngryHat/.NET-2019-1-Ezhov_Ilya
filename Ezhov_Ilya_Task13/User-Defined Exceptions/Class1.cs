@@ -6,6 +6,21 @@ using System.Threading.Tasks;
 
 namespace User_Defined_Exceptions
 {
+    public class NonPositiveDepositAmountException : Exception
+    {
+        public NonPositiveDepositAmountException() : base()
+        {
+        }
+
+        public NonPositiveDepositAmountException(string message) : base(message)
+        {
+        }
+
+        public NonPositiveDepositAmountException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+
     public class MaxDepositAmountException : Exception
     {
         public MaxDepositAmountException()
@@ -32,21 +47,6 @@ namespace User_Defined_Exceptions
         }
 
         public WithdrawCountException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
-
-    public class OutOfBalanceException : Exception
-    {
-        public OutOfBalanceException()
-        {
-        }
-
-        public OutOfBalanceException(string message) : base(message)
-        {
-        }
-
-        public OutOfBalanceException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

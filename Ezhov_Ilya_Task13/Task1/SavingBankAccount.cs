@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using User_Defined_Exceptions;
 
 namespace Task1
 {
@@ -19,10 +20,16 @@ namespace Task1
         }
 
         public override void Deposit(decimal amount)
+
         {
+            if (amount <= 0)
+            {
+                throw new NonPositiveDepositAmountException("Deposit amount must be positive");
+            }
+
             if (amount >= MaxDepositAmount)
             {
-                throw new Exception(string.Format("You can not deposit amount greater than {0}", MaxDepositAmount.ToString()));
+                throw new MaxDepositAmountException($"Your maximum deposit amount is {MaxDepositAmount.ToString()}");
             }
 
             AccountBalance = AccountBalance + amount;
@@ -34,12 +41,12 @@ namespace Task1
         {
             if (withdrawCount > 3)
             {
-                throw new Exception("You can not withdraw amount more than thrice");
+                throw new WithdrawCountException("You can not withdraw amount more than thrice");
             }
 
             if (AccountBalance - amount <= MinAccountBalance)
             {
-                throw new Exception("You can not withdraw amount from your Savings Account as Minimum Balance limit is reached");
+                throw new MinBalanceReachedException("You can not withdraw amount from your Savings Account as Minimum Balance limit is reached");
             }
 
             AccountBalance = AccountBalance - amount;
@@ -53,9 +60,9 @@ namespace Task1
             Console.WriteLine("Saving Account Report");
             base.GenerateAccountReport();
 
-            if (AccountBalance < 15000)
+            if (AccountBalance < 25000) // changed to demonstrate exp
             {
-                throw new Exception("Insifficient amount of funds to generate report");
+                throw new ReportGeneratingException("Insifficient amount of funds to generate report");
             }
 
             Console.WriteLine("Sending Email for Account {0}", AccountNumber);

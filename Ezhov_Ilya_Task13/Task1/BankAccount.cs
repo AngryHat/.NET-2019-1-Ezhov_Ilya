@@ -8,7 +8,7 @@ namespace Task1
 {
     public abstract class BankAccount
     {
-        // thi variable will hold the summary of all the transaction that took place
+        // this variable will hold the summary of all the transaction that took place
         protected string TransactionSummary { get; set; }
 
         // Name of the Account Owner, Its common for all derived classes
