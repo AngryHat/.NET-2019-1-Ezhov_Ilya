@@ -122,7 +122,7 @@ namespace Task2
         }
 
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator GetEnumerator() // last correction
         {
             for (int i = 0; i < Length; i++)
             {

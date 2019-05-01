@@ -81,7 +81,7 @@ namespace Task3
             thread.Start(stringArray);
             SortArray(stringArray);
 
-            Event @event = new Event();
+            Event @event = new Event(); //events added
             while (true)
             {
                 if (!thread.IsAlive)

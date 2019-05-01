@@ -39,7 +39,7 @@ namespace Task1
 
         public override void Withdraw(decimal amount)
         {
-            if (withdrawCount > 3)
+            if (withdrawCount >= 3)
             {
                 throw new WithdrawCountException("You can not withdraw amount more than thrice");
             }
@@ -57,13 +57,14 @@ namespace Task1
 
         public override void GenerateAccountReport()
         {
-            Console.WriteLine("Saving Account Report");
-            base.GenerateAccountReport();
-
+            Console.WriteLine("Saving Account Report:");
+            
             if (AccountBalance < 25000) // changed to demonstrate exp
             {
                 throw new ReportGeneratingException("Insifficient amount of funds to generate report");
             }
+
+            base.GenerateAccountReport();
 
             Console.WriteLine("Sending Email for Account {0}", AccountNumber);
         }

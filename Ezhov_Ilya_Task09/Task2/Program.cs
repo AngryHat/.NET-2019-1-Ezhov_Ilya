@@ -35,7 +35,7 @@ namespace Task2
             Console.WriteLine($"7. Using [index] to set value {c} for the last element:");
             dyn1[7] = c;
             dyn1.ShowArray();
-            Console.WriteLine($"8. Using foreach (with own Enumerator) to get all vaqlues in one line:");
+            Console.WriteLine($"8. Using foreach (with own Enumerator) to get all vaqlues in one line:"); //foreach added
             foreach (var e in dyn1)
             {
                 Console.Write(e + " ");

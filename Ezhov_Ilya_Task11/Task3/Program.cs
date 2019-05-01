@@ -88,6 +88,10 @@ namespace Task3
             Random rnd = new Random();
             int i = rnd.Next(1, 1000);
             int j = rnd.Next(1000, 2000);
+            //for (int a = -100; a < 100)
+            //{
+            //    for
+            //}
             return (i * x * 1817 << 3) ^ (j * y * 1615 << 5);
         }
     }

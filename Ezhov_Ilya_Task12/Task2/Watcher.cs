@@ -77,7 +77,7 @@ namespace Task2
         {
             string backupRequest = Console.ReadLine();
             string backupPath = BackupFolderPath + "\\" + backupRequest;
-
+            
             if (File.Exists(backupPath))
             {
                 int n = backupRequest.IndexOf(" ");

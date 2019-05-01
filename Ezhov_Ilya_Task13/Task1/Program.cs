@@ -18,20 +18,22 @@ namespace Task1
             BankAccount currentAccount = new CurrentBankAccount("Mark", "C12345");
 
             TryCatchAmount(savingAccount.Deposit, 40000);
-            TryCatchAmount(savingAccount.Deposit, -1); // non-positive deposit amount ex
-            TryCatchAmount(savingAccount.Deposit, 50001); // maximum deposit amount ex
-            TryCatchAmount(savingAccount.Withdraw, 100000); // min balanse ex
-            TryCatchAmount(savingAccount.Withdraw, 15000);
+            TryCatchAmount(savingAccount.Deposit, -1); // non-positive deposit amount exc
+            TryCatchAmount(savingAccount.Deposit, 50001); // maximum deposit amount exc
+            TryCatchAmount(savingAccount.Withdraw, 100000); // min balanse exc
+            TryCatchAmount(savingAccount.Withdraw, 15000); // report exc
             TryCatchAmount(savingAccount.Withdraw, 1000);
             TryCatchAmount(savingAccount.Withdraw, 1000);
-            TryCatchAmount(savingAccount.Withdraw, 1000);// fourth withdraw ex
+            TryCatchAmount(savingAccount.Withdraw, 1000);// fourth withdraw exc
 
             TryCatchReport(savingAccount.GenerateAccountReport);
 
             Console.WriteLine();
             TryCatchAmount(currentAccount.Deposit,190000);
             TryCatchAmount(currentAccount.Withdraw,1000);
-            TryCatchAmount(currentAccount.Withdraw,189000);
+            TryCatchAmount(currentAccount.Deposit, -1000); // non-positive deposit amount exc
+            TryCatchAmount(currentAccount.Deposit, 1100000000); // maximum deposit amount exc
+            TryCatchAmount(currentAccount.Withdraw,190000); // min balanse exc 
 
             TryCatchReport(currentAccount.GenerateAccountReport);
 
@@ -46,27 +48,19 @@ namespace Task1
             }
             catch (NonPositiveDepositAmountException e)
             {
-                Console.WriteLine($"Operation failed!\n" +
-                    $"Details: {e.Message}\n" +
-                    $"Date  and time: {DateTime.Now}\n");
+                AmountExcLog(e);
             }
             catch (MaxDepositAmountException e)
             {
-                Console.WriteLine($"Operation failed!\n" +
-                    $"Details: {e.Message}\n" +
-                    $"Date  and time: {DateTime.Now}\n");
+                AmountExcLog(e);
             }
             catch (WithdrawCountException e)
             {
-                Console.WriteLine($"Operation failed!\n" +
-                    $"Details: {e.Message}\n" +
-                    $"Date  and time: {DateTime.Now}\n");
+                AmountExcLog(e);
             }
             catch (MinBalanceReachedException e)
             {
-                Console.WriteLine($"Operation failed!\n" +
-                    $"Details: {e.Message}\n" +
-                    $"Date  and time: {DateTime.Now}\n");
+                AmountExcLog(e);
             }
         }
 
@@ -78,11 +72,21 @@ namespace Task1
             }
             catch (ReportGeneratingException e)
             {
-                Console.WriteLine($"Report operation failed!\n" +
-                    $"Details: {e.Message}\n" +
-                    $"Date  and time: {DateTime.Now}\n");
+                ReportExcLog(e);
             }
         }
 
+        public static void AmountExcLog(Exception e)
+        {
+            Console.WriteLine($"Operation failed!\n" +
+                    $"Details: {e.Message}\n" +
+                    $"Date  and time: {DateTime.Now}\n");
+        }
+        public static void ReportExcLog(Exception e)
+        {
+            Console.WriteLine($"Report operation failed!\n" +
+                $"Details: {e.Message}\n" +
+                $"Date  and time: {DateTime.Now}\n");
+        }
     }
 }
