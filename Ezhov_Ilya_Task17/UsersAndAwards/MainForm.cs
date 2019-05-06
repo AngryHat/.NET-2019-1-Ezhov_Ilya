@@ -25,27 +25,27 @@ namespace UsersAndAwards
 
         public MainForm()
         {
-            usersList = Logic.GetAllUsers();
             awardsList = Logic.GetAllAwards();
-            userModelsList = Logic.GetAllUserModels(); // MODELS ARE NOT USING YET
+            usersList = Logic.GetAllUsers();
+            
+            //userModelsList = Logic.GetAllUserModels(); // MODELS ARE NOT USING YET
 
             // adding some users
-            Logic.AddUserWithParams("Ivan", "Ruka", DateTime.Parse("1989.11.23"), null);
-            Logic.AddUserWithParams("Roman", "Zhukov", DateTime.Parse("1999.02.11"), null);
-            Logic.AddUserWithParams("Alena", "Apina", DateTime.Parse("1987.03.08"), null);
-            Logic.AddUserWithParams("Vasyliy", "Erohin", DateTime.Parse("1963.08.14"), null);
+            //Logic.AddUserWithParams("Ivan", "Ruka", DateTime.Parse("1989.11.23"), null);
+            //Logic.AddUserWithParams("Roman", "Zhukov", DateTime.Parse("1999.02.11"), null);
+            //Logic.AddUserWithParams("Alena", "Apina", DateTime.Parse("1987.03.08"), null);
+            //Logic.AddUserWithParams("Vasyliy", "Erohin", DateTime.Parse("1963.08.14"), null);
 
-            // adding some awards
-            Logic.AddAwardWithParams("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!");
-            Logic.AddAwardWithParams("Oscar", "Wow! You acted awesome in that movie, but of course, you already know it.");
+            //// adding some awards
+            //Logic.AddAwardWithParams("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!");
+            //Logic.AddAwardWithParams("Oscar", "Wow! You acted awesome in that movie, but of course, you already know it.");
 
 
             
             InitializeComponent();
             
             dgvUsers.AutoGenerateColumns = false;
-            //use view model
-            //dgvUsers.DataSource = usersList.Select(u=>new UserViewModel()).ToList();
+            dgvUsers.DataSource = usersList;
             dgvAwards.AutoGenerateColumns = false;
             dgvAwards.DataSource = awardsList;
 
@@ -63,6 +63,7 @@ namespace UsersAndAwards
         {
             if (columIndex == 1) //FIRST NAME
             {
+                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
                     usersList = new List<User>(usersList.OrderBy(user => user.FirstName).ToList());
@@ -74,6 +75,7 @@ namespace UsersAndAwards
             }
             if (columIndex == 2) //LAST NAME
             {
+                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
                     usersList = new List<User>(usersList.OrderBy(user => user.LastName).ToList());
@@ -85,6 +87,7 @@ namespace UsersAndAwards
             }
             if (columIndex == 3) //BD
             {
+                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
                     usersList = new List<User>(usersList.OrderBy(user => user.BirthDate).ToList());
@@ -96,9 +99,13 @@ namespace UsersAndAwards
             }
             if (columIndex == 4) //AGE
             {
+                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
                     usersList = new List<User>(usersList.OrderBy(user => user.Age).ToList());
+                    // SORT SOLUTION
+                    dgvUsers.DataSource = null;
+                    dgvUsers.DataSource = usersList;
                 }
                 else
                 {
@@ -106,18 +113,20 @@ namespace UsersAndAwards
                 }
             }
             SortDirection = !SortDirection;
-            RefreshUsersGrid();
+            
         }
 
         private void RefreshUsersGrid()
         {
             dgvUsers.DataSource = null;
+            usersList = Logic.GetAllUsers();
             dgvUsers.DataSource = usersList;
         }
 
         private void RefreshAwardsGrid()
         {
             dgvAwards.DataSource = null;
+            awardsList = Logic.GetAllAwards();
             dgvAwards.DataSource = awardsList;
         }
 

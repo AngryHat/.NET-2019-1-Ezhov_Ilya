@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Entities;
 using DAL.Memory;
+using System.Configuration;
 
 namespace BLL.Logic
 {
@@ -10,7 +11,12 @@ namespace BLL.Logic
         private IStorage dataStorage;
         public Logic()
         {
-            dataStorage = new MemoryDataStorage();
+            //err with config
+            if (ConfigurationManager.AppSettings["storageType"] == "DB")
+            {
+                dataStorage = new DBDataStorage();
+            }
+            else { dataStorage = new MemoryDataStorage(); }
         }
 
         //add

@@ -4,37 +4,6 @@ using Entities;
 
 namespace DAL.Memory
 {
-    //interface IStorage
-    //{
-    //    void Add();
-    //    void Edit();
-    //    void Remove();
-    //}
-    public interface IStorage
-    {
-
-        void AddUser(User user);
-        void AddUser(string fname, string lname, DateTime bdate, List<Award> awards);
-        void AddAward(Award award);
-        void AddAward(string title, string description);
-
-        void UpdateUser(User user, string fname, string lname, DateTime bdate, List<Award> awards);
-        void UpdateAward(Award award, string title, string description);
-
-        void RemoveUser(User user);
-        void RemoveUserById(int userId);
-        void RemoveAward(Award award);
-        void RemoveAwardById(int awardId);
-
-        Award GetAwardById(int awardId);
-        User GetUserById(int userId);
-
-        List<User> GetAllUsers();
-        List<Award> GetAllAwards();
-
-        List<UserViewModel> GetAllUserModels();
-    }
-
     public class MemoryDataStorage : IStorage
     {
         public static List<User> UsersList;
@@ -94,7 +63,7 @@ namespace DAL.Memory
             User user = GetUserById(userId);
             UsersList.Remove(user);
         }
-        
+
         public void RemoveAward(Award award)
         {
             AwardsList.Remove(award);
@@ -139,25 +108,4 @@ namespace DAL.Memory
         }
     }
 
-
-    ////old version
-    //public class UserStorage
-    //{
-    //    public static List<User> UsersList = new List<User>();
-
-    //    public static void Add(string fName, string lName, DateTime bDate, List<Award> awards)
-    //    {
-    //        UsersList.Add(new User(fName, lName, bDate, awards));
-    //    }
-    //}
-
-    //public class AwardStorage
-    //{
-    //    public static List<Award> AwardsList = new List<Award>();
-
-    //    public static void Add(string title, string description)
-    //    {
-    //        AwardsList.Add(new Award(title, description));
-    //    }
-    //}
 }
