@@ -11,9 +11,6 @@ namespace UsersAndAwards
 {
     public partial class MainForm : Form
     {
-        delegate DateTime DTSortingDelegate(User u);
-        delegate string StringSortingDelegate(User u);
-
         private bool SortDirection = true;
         
         private Logic Logic = new Logic();
@@ -27,20 +24,6 @@ namespace UsersAndAwards
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
-            
-            //userModelsList = Logic.GetAllUserModels(); // MODELS ARE NOT USING YET
-
-            // adding some users
-            //Logic.AddUserWithParams("Ivan", "Ruka", DateTime.Parse("1989.11.23"), null);
-            //Logic.AddUserWithParams("Roman", "Zhukov", DateTime.Parse("1999.02.11"), null);
-            //Logic.AddUserWithParams("Alena", "Apina", DateTime.Parse("1987.03.08"), null);
-            //Logic.AddUserWithParams("Vasyliy", "Erohin", DateTime.Parse("1963.08.14"), null);
-
-            //// adding some awards
-            //Logic.AddAwardWithParams("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!");
-            //Logic.AddAwardWithParams("Oscar", "Wow! You acted awesome in that movie, but of course, you already know it.");
-
-
             
             InitializeComponent();
             
@@ -63,57 +46,63 @@ namespace UsersAndAwards
         {
             if (columIndex == 1) //FIRST NAME
             {
-                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(usersList.OrderBy(user => user.FirstName).ToList());
+                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.FirstName).ToList());
+                    RefreshUsersGridSorted();
                 }
                 else
                 {
-                    usersList = new List<User>(usersList.OrderByDescending(user => user.FirstName).ToList());
+                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.FirstName).ToList());
+                    RefreshUsersGridSorted();
                 }
             }
             if (columIndex == 2) //LAST NAME
             {
-                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(usersList.OrderBy(user => user.LastName).ToList());
+                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.LastName).ToList());
+                    RefreshUsersGridSorted();
                 }
                 else
                 {
-                    usersList = new List<User>(usersList.OrderByDescending(user => user.LastName).ToList());
+                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.LastName).ToList());
+                    RefreshUsersGridSorted();
                 }
             }
             if (columIndex == 3) //BD
             {
-                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(usersList.OrderBy(user => user.BirthDate).ToList());
+                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.BirthDate).ToList());
+                    RefreshUsersGridSorted();
                 }
                 else
                 {
-                    usersList = new List<User>(usersList.OrderByDescending(user => user.BirthDate).ToList());
+                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.BirthDate).ToList());
+                    RefreshUsersGridSorted();
                 }
             }
             if (columIndex == 4) //AGE
             {
-                RefreshUsersGrid();
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(usersList.OrderBy(user => user.Age).ToList());
-                    // SORT SOLUTION
-                    dgvUsers.DataSource = null;
-                    dgvUsers.DataSource = usersList;
+                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.Age).ToList());
+                    RefreshUsersGridSorted();
                 }
                 else
                 {
-                    usersList = new List<User>(usersList.OrderByDescending(user => user.Age).ToList());
+                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.Age).ToList());
+                    RefreshUsersGridSorted();
                 }
             }
             SortDirection = !SortDirection;
-            
+        }
+
+        private void RefreshUsersGridSorted()
+        {
+            dgvUsers.DataSource = null;
+            dgvUsers.DataSource = usersList;
         }
 
         private void RefreshUsersGrid()
@@ -137,7 +126,7 @@ namespace UsersAndAwards
 
             if (userForm.ShowDialog(this) == DialogResult.OK)
             {
-                Logic.AddUserWithParams(userForm.FirstName, userForm.LastName, userForm.BirthDate, userForm.Awards);
+                Logic.AddUser(userForm.FirstName, userForm.LastName, userForm.BirthDate, userForm.Awards);
             }
             RefreshUsersGrid();
         }
@@ -152,7 +141,7 @@ namespace UsersAndAwards
 
             if (awardForm.ShowDialog(this) == DialogResult.OK)
             {
-                Logic.AddAwardWithParams(awardForm.Title, awardForm.Description);
+                Logic.AddAward(awardForm.Title, awardForm.Description);
             }
             RefreshAwardsGrid();
         }
@@ -174,8 +163,8 @@ namespace UsersAndAwards
                 {
                     Logic.UpdateUser(user, userForm.FirstName, userForm.LastName, userForm.BirthDate, userForm.Awards);
                 }
-                RefreshUsersGrid();
             }
+            RefreshUsersGrid();
         }
         private void mmUserEdit_Click(object sender, EventArgs e)
         {
@@ -194,8 +183,9 @@ namespace UsersAndAwards
                 {
                     Logic.UpdateAward(award, awardForm.Title, awardForm.Description);
                 }
-                RefreshAwardsGrid();
             }
+            RefreshUsersGrid();
+            RefreshAwardsGrid();
         }
         private void mmAwardEdit_Click(object sender, EventArgs e)
         {

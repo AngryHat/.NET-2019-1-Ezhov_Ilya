@@ -24,7 +24,7 @@ namespace BLL.Logic
         {
             dataStorage.AddUser(user);
         }
-        public void AddUserWithParams(string fname, string lname, DateTime bdate, List<Award> awards)
+        public void AddUser(string fname, string lname, DateTime bdate, List<Award> awards)
         {
             dataStorage.AddUser(fname, lname, bdate, awards);
         }
@@ -32,7 +32,7 @@ namespace BLL.Logic
         {
             dataStorage.AddAward(award);
         }
-        public void AddAwardWithParams(string title, string description)
+        public void AddAward(string title, string description)
         {
             dataStorage.AddAward(title, description);
         }

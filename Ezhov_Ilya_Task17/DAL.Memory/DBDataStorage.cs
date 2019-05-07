@@ -14,7 +14,7 @@ namespace DAL.Memory
             UsersList = new List<User>();
             AwardsList = new List<Award>();
         }
-        
+
         static string connectionString = ConfigurationManager.AppSettings["connectionString"];
         private SqlConnection connection = new SqlConnection(connectionString);
 
@@ -50,6 +50,8 @@ namespace DAL.Memory
         {
             using (var connection = new SqlConnection(connectionString))
             {
+                int newUserID;
+
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     connection.Open();
@@ -66,7 +68,24 @@ namespace DAL.Memory
                     command.Parameters[1].Value = lname;
                     command.Parameters[2].Value = bdate;
 
-                    var result = command.ExecuteNonQuery();
+                    newUserID = Convert.ToInt32(command.ExecuteScalar());
+                }
+                foreach (Award award in awards)
+                {
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = "InsertRelation";
+                        command.CommandType = CommandType.StoredProcedure;
+
+
+                        command.Parameters.Add(new SqlParameter("@userID", SqlDbType.Int));
+                        command.Parameters.Add(new SqlParameter("@awardID", SqlDbType.Int));
+
+                        command.Parameters[0].Value = newUserID;
+                        command.Parameters[1].Value = award.id;
+
+                        var result = command.ExecuteNonQuery();
+                    }
                 }
             }
         }
@@ -143,12 +162,24 @@ namespace DAL.Memory
                 }
                 using (SqlCommand command = connection.CreateCommand())
                 {
-                    connection.Open();
-                    command.CommandText = "UpdateRelation";
+                    command.CommandText = "ClearUserRelations";
                     command.CommandType = CommandType.StoredProcedure;
 
-                    foreach (var award in awards)
+                    command.Parameters.Add(new SqlParameter("@userID", SqlDbType.Int));
+
+                    command.Prepare();
+
+                    command.Parameters[0].Value = user.id;
+                    var result = command.ExecuteNonQuery();
+                }
+
+                foreach (var award in awards)
+                {
+                    using (SqlCommand command = connection.CreateCommand())
                     {
+                        command.CommandText = "UpdateRelation";
+                        command.CommandType = CommandType.StoredProcedure;
+
                         command.Parameters.Add(new SqlParameter("@userID", SqlDbType.Int));
                         command.Parameters.Add(new SqlParameter("@awardID", SqlDbType.Int));
 
@@ -195,6 +226,18 @@ namespace DAL.Memory
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     connection.Open();
+                    command.CommandText = "ClearUserRelations";
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter("@userID", SqlDbType.Int));
+
+                    command.Prepare();
+
+                    command.Parameters[0].Value = user.id;
+                    var result = command.ExecuteNonQuery();
+                }
+                using (SqlCommand command = connection.CreateCommand())
+                {
                     command.CommandText = "RemoveUser";
                     command.CommandType = CommandType.StoredProcedure;
 
@@ -303,7 +346,7 @@ namespace DAL.Memory
                             var FirstName = reader.GetString(1);
                             var LastName = reader.GetString(2);
                             var BirthDate = reader.GetDateTime(3);
-                            var user = new User(UserID, FirstName, LastName, BirthDate, null);
+                            var user = new User(UserID, FirstName, LastName, BirthDate, null); // NULL!!!!!!!!!!
                             UsersList.Add(user);
 
                         }
@@ -329,7 +372,7 @@ namespace DAL.Memory
         {
             AwardsList = new List<Award>();
 
-            using (var connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
 
                 using (SqlCommand command = connection.CreateCommand())
@@ -338,7 +381,7 @@ namespace DAL.Memory
                     command.CommandText = "GetAllAwards";
                     command.CommandType = CommandType.StoredProcedure;
 
-                    using (var reader = command.ExecuteReader())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {

@@ -90,6 +90,13 @@ VALUES (@userID, @awardID)
 
 -- WRONG LOGIC
 GO 
+CREATE PROCEDURE ClearUserRelations(
+@userID int)
+AS
+DELETE UserAwardsRelation
+FROM UserAwardsRelation WHERE UserID =  @userID;
+
+GO 
 CREATE PROCEDURE UpdateRelation(
 @userID int,
 @awardID int)
@@ -102,7 +109,7 @@ CREATE PROCEDURE RemoveRelation(
 @userID int,
 @awardID int)
 AS
-AS DELETE FROM UserAwardsRelation WHERE (AwardID = @awardID AND UserID = @userID)
+DELETE FROM UserAwardsRelation WHERE (AwardID = @awardID AND UserID = @userID)
 
 GO 
 CREATE PROCEDURE GetAllInfo
@@ -112,7 +119,7 @@ FROM Users
 LEFT JOIN UserAwardsRelation ON Users.UserID = UserAwardsRelation.UserID
 LEFT JOIN Awards ON Awards.AwardID = UserAwardsRelation.AwardID;
 
---можно сделать 
+--можно сделать через новый тип
 
 -- user proc.es
 GO 
@@ -132,6 +139,7 @@ WHERE Users.UserID = @userID;
 
 GO 
 CREATE PROCEDURE InsertUser(
+@newUserID int,
 @firstName nvarchar(50),
 @lastName nvarchar(50),
 @birthDate datetime2)
@@ -151,8 +159,8 @@ CREATE PROCEDURE UpdateUser(
 AS
 UPDATE Users
 SET FirstName = @firstName,
-LastName @lastName, 
-BirthDate = @birthdate)
+LastName = @lastName, 
+BirthDate = @birthdate
 WHERE UserID = @userID
 
 GO 
@@ -190,11 +198,13 @@ CREATE PROCEDURE UpdateAward(
 AS
 UPDATE Awards
 SET Title = @title,
-[Description] = @description)
+[Description] = @description
 WHERE AwardID = @awardID
 
 GO 
 CREATE PROCEDURE RemoveAward(@awardID int)
-AS DELETE FROM Awards WHERE AwardID = @awardID;
+AS
+DELETE UserAwardsRelation FROM UserAwardsRelation WHERE AwardID = @awardID;
+DELETE FROM Awards WHERE AwardID = @awardID;
 
 DROP DATABASE UsersAndAwards;
