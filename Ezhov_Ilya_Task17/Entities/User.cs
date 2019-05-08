@@ -68,6 +68,7 @@ namespace Entities
 
         public List<Award> Awards;
 
+        //unnecessary since VM classes woks
         public string AwardsToString
         {
             get

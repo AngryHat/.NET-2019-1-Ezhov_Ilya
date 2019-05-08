@@ -19,18 +19,22 @@ namespace UsersAndAwards
         public static List<Award> awardsList;
 
         public static List<UserViewModel> userModelsList;
+        public static List<AwardViewModel> awardModelsList;
 
         public MainForm()
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
-            
+
+            awardModelsList = Logic.GetAllAwardsViewModels(awardsList);
+            userModelsList = Logic.GetAllUsersViewModels(usersList);
+
             InitializeComponent();
             
             dgvUsers.AutoGenerateColumns = false;
-            dgvUsers.DataSource = usersList;
+            dgvUsers.DataSource = userModelsList;
             dgvAwards.AutoGenerateColumns = false;
-            dgvAwards.DataSource = awardsList;
+            dgvAwards.DataSource = awardModelsList;
 
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dgvAwards.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
@@ -44,79 +48,104 @@ namespace UsersAndAwards
         // Users GDV methods
         public void SortBy(int columIndex)
         {
+            if (columIndex == 0) //id
+            {
+                if (SortDirection == true)
+                {
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderBy(UserViewModel => UserViewModel.id).ToList();
+                    RefreshSortedUsersGrid();
+                }
+                else
+                {
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderByDescending(UserViewModel => UserViewModel.id).ToList();
+                    RefreshSortedUsersGrid();
+                }
+            }
             if (columIndex == 1) //FIRST NAME
             {
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.FirstName).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderBy(UserViewModel => UserViewModel.FirstName).ToList();
+                    RefreshSortedUsersGrid();
                 }
                 else
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.FirstName).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderByDescending(UserViewModel => UserViewModel.FirstName).ToList();
+                    RefreshSortedUsersGrid();
                 }
             }
             if (columIndex == 2) //LAST NAME
             {
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.LastName).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderBy(UserViewModel => UserViewModel.LastName).ToList();
+                    RefreshSortedUsersGrid();
                 }
                 else
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.LastName).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderByDescending(UserViewModel => UserViewModel.LastName).ToList();
+                    RefreshSortedUsersGrid();
                 }
             }
             if (columIndex == 3) //BD
             {
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.BirthDate).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderBy(UserViewModel => UserViewModel.BirthDate).ToList();
+                    RefreshSortedUsersGrid();
                 }
                 else
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.BirthDate).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderByDescending(UserViewModel => UserViewModel.BirthDate).ToList();
+                    RefreshSortedUsersGrid();
                 }
             }
             if (columIndex == 4) //AGE
             {
                 if (SortDirection == true)
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderBy(user => user.Age).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderBy(UserViewModel => UserViewModel.Age).ToList();
+                    RefreshSortedUsersGrid();
                 }
                 else
                 {
-                    usersList = new List<User>(Logic.GetAllUsers().OrderByDescending(user => user.Age).ToList());
-                    RefreshUsersGridSorted();
+                    usersList = Logic.GetAllUsers();
+                    userModelsList = Logic.GetAllUsersViewModels(usersList).OrderByDescending(UserViewModel => UserViewModel.Age).ToList();
+                    RefreshSortedUsersGrid();
                 }
             }
             SortDirection = !SortDirection;
         }
 
-        private void RefreshUsersGridSorted()
+        private void RefreshSortedUsersGrid()
         {
             dgvUsers.DataSource = null;
-            dgvUsers.DataSource = usersList;
+            dgvUsers.DataSource = userModelsList;
         }
 
         private void RefreshUsersGrid()
         {
-            dgvUsers.DataSource = null;
             usersList = Logic.GetAllUsers();
-            dgvUsers.DataSource = usersList;
+            userModelsList = Logic.GetAllUsersViewModels(usersList);
+            dgvUsers.DataSource = null;
+            dgvUsers.DataSource = userModelsList;
         }
 
         private void RefreshAwardsGrid()
         {
-            dgvAwards.DataSource = null;
             awardsList = Logic.GetAllAwards();
-            dgvAwards.DataSource = awardsList;
+            awardModelsList = Logic.GetAllAwardsViewModels(awardsList);
+            dgvAwards.DataSource = null;
+            dgvAwards.DataSource = awardModelsList;
         }
 
         // ADD BUTTONS
@@ -155,7 +184,8 @@ namespace UsersAndAwards
         {
             if (dgvUsers.SelectedCells.Count == 1)
             {
-                User user = (User)dgvUsers.SelectedCells[0].OwningRow.DataBoundItem;
+                UserViewModel userViewModel = (UserViewModel)dgvUsers.SelectedCells[0].OwningRow.DataBoundItem;
+                User user = Logic.GetUserById(userViewModel.id);
 
                 UserForm userForm = new UserForm(user);
                 
@@ -175,7 +205,8 @@ namespace UsersAndAwards
         {
             if (dgvAwards.SelectedCells.Count == 1)
             {
-                Award award = (Award)dgvAwards.SelectedCells[0].OwningRow.DataBoundItem;
+                AwardViewModel awardViewModel = (AwardViewModel)dgvAwards.SelectedCells[0].OwningRow.DataBoundItem;
+                Award award = Logic.GetAwardById(awardViewModel.id);
 
                 AwardForm awardForm = new AwardForm(award);
 
@@ -201,7 +232,8 @@ namespace UsersAndAwards
                                      MessageBoxButtons.YesNo);
                 if (confirmRemove == DialogResult.Yes)
                 {
-                    User user = (User)dgvUsers.SelectedCells[0].OwningRow.DataBoundItem;
+                    UserViewModel userViewModel = (UserViewModel)dgvUsers.SelectedCells[0].OwningRow.DataBoundItem;
+                    User user = Logic.GetUserById(userViewModel.id);
                     Logic.RemoveUser(user);
                 }
             }
@@ -220,7 +252,8 @@ namespace UsersAndAwards
                                      MessageBoxButtons.YesNo);
                 if (confirmRemove == DialogResult.Yes)
                 {
-                    Award award = (Award)dgvAwards.SelectedCells[0].OwningRow.DataBoundItem;
+                    AwardViewModel awardViewModel = (AwardViewModel)dgvAwards.SelectedCells[0].OwningRow.DataBoundItem;
+                    Award award = Logic.GetAwardById(awardViewModel.id);
                     Logic.RemoveAward(award);
                 }
             }

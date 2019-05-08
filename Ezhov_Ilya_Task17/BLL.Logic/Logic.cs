@@ -95,35 +95,16 @@ namespace BLL.Logic
             return dataStorage.GetAllAwards();
         }
 
-        //getAllModels
-        public List<UserViewModel> GetAllUserModels()
+
+        //viewModels
+        public List<UserViewModel> GetAllUsersViewModels(List<User> allUsers)
         {
-            return dataStorage.GetAllUserModels();
+            return dataStorage.GetAllUsersViewModels(allUsers);
         }
-
-        ////viewModels
-        //public List<UserViewModel> GetUsersViewModel()
-        //{
-        //    List<User> allUsers = GetAllUsers();
-        //    List<UserViewModel> allUserModels = new List<UserViewModel>();
-
-        //    foreach (User user in allUsers)
-        //    {
-        //        allUserModels.Add(UserViewModel.GetUserViewModel(user));
-        //    }
-        //    return allUserModels;
-        //}
-        //public List<AwardViewModel> GetAwardsViewModel()
-        //{
-        //    List<Award> allAwards = GetAllAwards();
-        //    List<AwardViewModel> allAwardModels = new List<AwardViewModel>();
-
-        //    foreach (Award award in allAwards)
-        //    {
-        //        allAwardModels.Add(AwardViewModel.GetAwardViewModel(award));
-        //    }
-        //    return allAwardModels;
-        //}
+        public List<AwardViewModel> GetAllAwardsViewModels(List<Award> allAwards)
+        {
+            return dataStorage.GetAllAwardsViewModels(allAwards);
+        }
     }
 }
 

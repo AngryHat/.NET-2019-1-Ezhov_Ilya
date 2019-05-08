@@ -253,7 +253,6 @@ namespace DAL.Memory
         }
         public void RemoveUserById(int userId)
         {
-
             using (var connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = connection.CreateCommand())
@@ -398,9 +397,26 @@ namespace DAL.Memory
         }
 
         //convertToModels
-        public List<UserViewModel> GetAllUserModels()
+        public List<UserViewModel> GetAllUsersViewModels(List<User> allUsers)
         {
-            throw new Exception("Somethong gone wrong");
+            List<UserViewModel> allUserModels = new List<UserViewModel>();
+
+            foreach (User user in allUsers)
+            {
+                allUserModels.Add(UserViewModel.GetUserViewModel(user));
+            }
+            return allUserModels;
+        }
+
+        public List<AwardViewModel> GetAllAwardsViewModels(List<Award> allAwards)
+        {
+            List<AwardViewModel> allAwardModels = new List<AwardViewModel>();
+
+            foreach (Award award in allAwards)
+            {
+                allAwardModels.Add(AwardViewModel.GetAwardViewModel(award));
+            }
+            return allAwardModels;
         }
     }
 }

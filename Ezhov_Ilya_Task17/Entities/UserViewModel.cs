@@ -23,9 +23,19 @@ namespace Entities
             userModel.LastName = user.LastName;
             userModel.Age = user.Age;
             userModel.BirthDate = user.BirthDate;
-            userModel.Awards = string.Join(", ", user.Awards.Select(award => award.Title));
-
+            if (user.Awards.Count == 0)
+            {
+                userModel.Awards = "No awards, sorry";
+            }
+            else
+            {
+                userModel.Awards = string.Join(", ", user.Awards.Select(award => award.Title));
+            }
+            
             return userModel;
         }
+
+
+
     }
 }

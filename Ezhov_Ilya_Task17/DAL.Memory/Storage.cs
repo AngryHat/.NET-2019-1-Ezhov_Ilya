@@ -32,6 +32,7 @@ namespace DAL.Memory
         List<User> GetAllUsers();
         List<Award> GetAllAwards();
 
-        List<UserViewModel> GetAllUserModels();
+        List<UserViewModel> GetAllUsersViewModels(List<User> allUsers);
+        List<AwardViewModel> GetAllAwardsViewModels(List<Award> allAwards);
     }
 }

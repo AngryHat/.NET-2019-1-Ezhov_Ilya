@@ -97,14 +97,25 @@ namespace DAL.Memory
         }
 
         //convertToModels
-        public List<UserViewModel> GetAllUserModels()
+        public List<UserViewModel> GetAllUsersViewModels(List<User> allUsers)
         {
-            List<UserViewModel> userModels = new List<UserViewModel>();
-            foreach (var user in UsersList)
+            List<UserViewModel> allUserModels = new List<UserViewModel>();
+
+            foreach (User user in allUsers)
             {
-                userModels.Add(UserViewModel.GetUserViewModel(user));
+                allUserModels.Add(UserViewModel.GetUserViewModel(user));
             }
-            return userModels;
+            return allUserModels;
+        }
+        public List<AwardViewModel> GetAllAwardsViewModels(List<Award> allAwards)
+        {
+            List<AwardViewModel> allAwardModels = new List<AwardViewModel>();
+
+            foreach (Award award in allAwards)
+            {
+                allAwardModels.Add(AwardViewModel.GetAwardViewModel(award));
+            }
+            return allAwardModels;
         }
     }
 
