@@ -1,0 +1,46 @@
+﻿
+@model Entities.Award
+@{
+    ViewBag.Title = "Users and Awards: Edit Award";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="tableHolder">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset class="form">
+            <legend>Award form:</legend>
+
+            <div>
+                Title:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+            <div>
+                Description:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+
+
+            <p class="menu">
+                <input type="submit" value="Add" />
+            </p>
+        </fieldset>
+    }
+</div>
+<div class="bottomMenu">
+    <p> @Html.ActionLink("Cancel", "Awards")</p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+}
+
+

@@ -1,0 +1,60 @@
+﻿
+@model Entities.User
+@{
+    ViewBag.Title = "Add User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="tableHolder">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset class="form">
+            <legend>User form:</legend>
+
+            <div>
+                First Name:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+            <div>
+                Last Name:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+            <div>
+                Birth Date:
+            </div>
+            <div>
+                @Html.EditorFor(model => model.BirthDate)
+                @Html.ValidationMessageFor(model => model.BirthDate)
+            </div>
+            <div>
+                Awards:
+            </div>
+            <div>
+                @foreach (var item in @ViewBag.Awards)
+                {
+                        <input type="checkbox" name="Awards" value=@item.id> @item.Title<Br>
+                }
+            </div>
+
+            <p class="menu">
+                <input type="submit" value="Add" />
+            </p>
+        </fieldset>
+    }
+</div>
+<div class="bottomMenu">
+    <p> @Html.ActionLink("Cancel", "Users")</p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

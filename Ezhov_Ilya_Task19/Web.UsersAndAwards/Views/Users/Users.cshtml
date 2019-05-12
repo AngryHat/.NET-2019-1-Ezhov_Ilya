@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Entities.UserViewModel>
+
+@{
+    ViewBag.Title = "Users and Awards: Users list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="tableHolder">
+    <table>
+
+        <tr class="columnTitle">
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Birth Date</th>
+            <th>Age</th>
+            <th>Awards</th>
+            <th colspan="2" class="tableButton"><p>CONTROLS</p></th>
+        </tr>
+
+        @foreach (var user in Model)
+        {
+            <tr class="data">
+                <th>
+                    @Html.DisplayFor(modelItem => user.id)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => user.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => user.LastName)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => user.BirthDate)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => user.Age)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => user.AwardsToString)
+                </th>
+                <th class="tableButton">
+                    @Html.ActionLink("EDIT", "EditUser", new {id=user.id})
+                </th>
+                <th class="tableButton">
+                    @Html.ActionLink(
+    "REMOVE",
+    "RemoveUser",
+    new { confirm = true, id = user.id },
+    new { onclick = "return confirm('Do you really want to remove this user?')" })
+                    @*@Html.ActionLink("REMOVE", "Remove", new {id= user.id })*@
+                </th>
+            </tr>
+        }
+    </table>
+</div>
+<div class="bottomMenu">
+    <p> @Html.ActionLink("Add User", "AddUser") </p>
+</div>
+</div>
+
+

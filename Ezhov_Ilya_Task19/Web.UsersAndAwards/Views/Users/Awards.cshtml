@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Entities.AwardViewModel>
+
+@{
+    ViewBag.Title = "Users and Awards: Awards list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="tableHolder">
+    <table>
+
+        <tr class="columnTitle">
+            <th width=33px; >ID</th>
+            <th width=95px>Title</th>
+            <th>Description</th>
+            <th colspan="2" class="tableButton"><p>CONTROLS</p></th>
+        </tr>
+
+        @foreach (var award in Model)
+        {
+            <tr class="data">
+                <th>
+                    @Html.DisplayFor(modelItem => award.id)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => award.Title)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => award.Description)
+                </th>
+                <th class="tableButton">
+                    @Html.ActionLink("EDIT", "EditAward", new { id = award.id })
+                </th>
+                <th class="tableButton">
+                    @Html.ActionLink(
+    "REMOVE",
+    "RemoveAward",
+    new { confirm = true, id = award.id },
+    new { onclick = "return confirm('Do you really want to remove this awards?')" })
+                </th>
+            </tr>
+        }
+    </table>
+</div>
+<div class="bottomMenu">
+    <p> @Html.ActionLink("Add Award", "AddAward") </p>
+</div>
+</div>

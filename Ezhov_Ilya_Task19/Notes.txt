@@ -1,0 +1,20 @@
+C#
+GRID does not refreshing after deleting the award (?!?!)
+ViewModel class still not using
+
+
+НЕИСПОЛЬЗУЕМЫЙ КОД:
+
+Заполнение таблицы для MemoryDataStorage
+
+//userModelsList = Logic.GetAllUserModels(); // MODELS ARE NOT USING YET
+
+            // adding some users
+            //Logic.AddUserWithParams("Ivan", "Ruka", DateTime.Parse("1989.11.23"), null);
+            //Logic.AddUserWithParams("Roman", "Zhukov", DateTime.Parse("1999.02.11"), null);
+            //Logic.AddUserWithParams("Alena", "Apina", DateTime.Parse("1987.03.08"), null);
+            //Logic.AddUserWithParams("Vasyliy", "Erohin", DateTime.Parse("1963.08.14"), null);
+
+            //// adding some awards
+            //Logic.AddAwardWithParams("Nobel Prize", "This is a great award! You must be proud of yourself for getting it!");
+            //Logic.AddAwardWithParams("Oscar", "Wow! You acted awesome in that movie, but of course, you already know it.");
