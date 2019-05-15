@@ -178,6 +178,11 @@ h1 {
         text-shadow: 0 0 5px white;
     }
 
+.bigFormField {
+    display: block;
+    width: 300px;
+    height: 120px;
+}
 
 
 

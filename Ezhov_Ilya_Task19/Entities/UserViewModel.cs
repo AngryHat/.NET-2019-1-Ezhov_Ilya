@@ -36,8 +36,5 @@ namespace Entities
             
             return userModel;
         }
-
-
-
     }
 }

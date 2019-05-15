@@ -16,7 +16,7 @@ namespace Entities
         {
             get
             {
-                return _title ?? "Unknown title";
+                return _title;
             }
             set
             {
@@ -32,7 +32,7 @@ namespace Entities
         {
             get
             {
-                return _description ?? "No description";
+                return _description;
             }
             set
             {
