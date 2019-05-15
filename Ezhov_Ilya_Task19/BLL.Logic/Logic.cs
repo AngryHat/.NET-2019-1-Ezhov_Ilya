@@ -99,11 +99,24 @@ namespace BLL.Logic
         //viewModels
         public List<UserViewModel> GetAllUsersViewModels(List<User> allUsers)
         {
-            return dataStorage.GetAllUsersViewModels(allUsers);
+            List<UserViewModel> allUserModels = new List<UserViewModel>();
+
+            foreach (User user in allUsers)
+            {
+                allUserModels.Add(UserViewModel.GetUserViewModel(user));
+            }
+            return allUserModels;
         }
+
         public List<AwardViewModel> GetAllAwardsViewModels(List<Award> allAwards)
         {
-            return dataStorage.GetAllAwardsViewModels(allAwards);
+            List<AwardViewModel> allAwardModels = new List<AwardViewModel>();
+
+            foreach (Award award in allAwards)
+            {
+                allAwardModels.Add(AwardViewModel.GetAwardViewModel(award));
+            }
+            return allAwardModels;
         }
     }
 }

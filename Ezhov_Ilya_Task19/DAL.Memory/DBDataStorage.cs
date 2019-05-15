@@ -414,28 +414,5 @@ namespace DAL.Memory
                 return AwardsList;
             }
         }
-
-        //convertToModels
-        public List<UserViewModel> GetAllUsersViewModels(List<User> allUsers)
-        {
-            List<UserViewModel> allUserModels = new List<UserViewModel>();
-
-            foreach (User user in allUsers)
-            {
-                allUserModels.Add(UserViewModel.GetUserViewModel(user));
-            }
-            return allUserModels;
-        }
-
-        public List<AwardViewModel> GetAllAwardsViewModels(List<Award> allAwards)
-        {
-            List<AwardViewModel> allAwardModels = new List<AwardViewModel>();
-
-            foreach (Award award in allAwards)
-            {
-                allAwardModels.Add(AwardViewModel.GetAwardViewModel(award));
-            }
-            return allAwardModels;
-        }
     }
 }
