@@ -15,8 +15,8 @@ namespace Web.UsersAndAwards
 
             routes.MapRoute(
                 name: "Default",
-                url: "{action}/{id}",
-                defaults: new { controller = "Users", action = "Users", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

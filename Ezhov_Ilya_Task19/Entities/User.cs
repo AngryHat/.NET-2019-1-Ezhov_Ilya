@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Entities
 {
@@ -7,8 +8,10 @@ namespace Entities
     {
         public int id { get; set; }
         public static int UserIDCounter = 0;
-
+        
         private string _firstName { get; set; }
+
+        
         public string FirstName
         {
             get

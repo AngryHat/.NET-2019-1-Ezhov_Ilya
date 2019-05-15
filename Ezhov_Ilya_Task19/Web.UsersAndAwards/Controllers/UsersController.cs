@@ -20,7 +20,7 @@ namespace Web.UsersAndAwards.Controllers
 
 
         // GET: Users
-        public ActionResult Users()
+        public ActionResult Index()
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
@@ -30,67 +30,45 @@ namespace Web.UsersAndAwards.Controllers
 
             return View(Logic.GetAllUsersViewModels(usersList));
         }
-        // GET: Awards
-        public ActionResult Awards()
-        {
-            awardsList = Logic.GetAllAwards();
-            usersList = Logic.GetAllUsers();
 
-            awardModelsList = Logic.GetAllAwardsViewModels(awardsList);
-
-            return View(Logic.GetAllAwardsViewModels(awardsList));
-        }
 
         
         // GET: Users/Create
-        public ActionResult AddUser()
+        public ActionResult Add()
         {
             ViewBag.Awards = awardsList;
 
             User user = new User();
             return View(user);
         }
-        // GET: Awards/Create
-        public ActionResult AddAward()
-        {
-            Award award = new Award();
-            return View(award);
-        }
+
 
         // POST: Users/Create
         [HttpPost]
-        public ActionResult AddUser(FormCollection collection)
+        public ActionResult Add(FormCollection collection)
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
 
             User newUser = new User(collection["FirstName"], collection["LastName"], DateTime.Parse(collection["BirthDate"]));
-            string[] awardsId = collection["Awards"].Split(',');
-            foreach (var item in awardsId)
+            if (collection["Awards"] != null)
             {
-                Award award = Logic.GetAwardById(Convert.ToInt32(item));
-                newUser.Awards.Add(award);
+                string[] awardsId = collection["Awards"].Split(',');
+                foreach (var item in awardsId)
+                {
+                    Award award = Logic.GetAwardById(Convert.ToInt32(item));
+                    newUser.Awards.Add(award);
+                }
             }
-
+            
             Logic.AddUser(newUser);
 
-            return RedirectToAction("Users");
+            return RedirectToAction("Index");
         }
-        // POST: Awards/Create
-        [HttpPost]
-        public ActionResult AddAward(FormCollection collection)
-        {
-            awardsList = Logic.GetAllAwards();
-            usersList = Logic.GetAllUsers();
 
-            Award newAward = new Award(collection["Title"], collection["Description"]);
-            Logic.AddAward(newAward);
-
-            return RedirectToAction("Awards");
-        }
 
         // GET: Users/Edit/5
-        public ActionResult EditUser(int id)
+        public ActionResult Edit(int id)
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
@@ -99,18 +77,11 @@ namespace Web.UsersAndAwards.Controllers
             User user = Logic.GetUserById(id);
             return View(user);
         }
-        // GET: Awards/Edit/5
-        public ActionResult EditAward(int id)
-        {
-            awardsList = Logic.GetAllAwards();
 
-            Award award = Logic.GetAwardById(id);
-            return View(award);
-        }
 
         // POST: Users/Edit/5
         [HttpPost]
-        public ActionResult EditUser(int id, FormCollection collection)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
@@ -131,24 +102,12 @@ namespace Web.UsersAndAwards.Controllers
 
             Logic.UpdateUser(user, collection["FirstName"], collection["LastName"], DateTime.Parse(collection["BirthDate"]), newAwards);
 
-            return RedirectToAction("Users");
+            return RedirectToAction("Index");
         }
-        // POST: Awards/Edit/5
-        [HttpPost]
-        public ActionResult EditAward(int id, FormCollection collection)
-        {
-            awardsList = Logic.GetAllAwards();
-            usersList = Logic.GetAllUsers();
 
-            Award award = Logic.GetAwardById(id);
-
-            Logic.UpdateAward(award, collection["Title"], collection["Description"]);
-
-            return RedirectToAction("Awards");
-        }
 
         // GET: Users/Delete/5
-        public ActionResult RemoveUser(int id)
+        public ActionResult Remove(int id)
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
@@ -157,19 +116,8 @@ namespace Web.UsersAndAwards.Controllers
             Logic.RemoveUser(user);
 
             //return View(user);
-            return RedirectToAction("Users");
+            return RedirectToAction("Index");
         }
-        // GET: Awards/Delete/5
-        public ActionResult RemoveAward(int id)
-        {
-            awardsList = Logic.GetAllAwards();
-            usersList = Logic.GetAllUsers();
 
-            Award award = Logic.GetAwardById(id);
-            Logic.RemoveAward(award);
-
-            //return View(user);
-            return RedirectToAction("Awards");
-        }
     }
 }

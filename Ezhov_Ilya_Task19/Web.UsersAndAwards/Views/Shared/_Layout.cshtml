@@ -15,17 +15,25 @@
             Users and Awards:
         </h1>
         <div class="menu">
-            <p> <a>@Html.ActionLink("Users", "Users")</a> </p>
-            <p> <a>@Html.ActionLink("Awards", "Awards")</a> </p>
+            <p>
+                <a>
+                    @Html.ActionLink("Users", "Index", "Users")
+                </a>
+            </p>
+            <p>
+                <a>
+                    @Html.ActionLink("Awards", "Index", "Awards")
+                </a>
+            </p>
         </div>
 
 
 
 
-    @RenderBody()
+        @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
     </div>
 
 </body>
