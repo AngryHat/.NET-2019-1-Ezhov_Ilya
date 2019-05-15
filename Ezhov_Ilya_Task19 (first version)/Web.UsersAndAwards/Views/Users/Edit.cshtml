@@ -1,5 +1,5 @@
 ﻿
-@model Web.UsersAndAwards.Models.UserEditViewModel
+@model Entities.User
 @{
     ViewBag.Title = "Users and Awards: Edit User";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,41 +13,39 @@
             <legend>User form:</legend>
 
             <div>
-                <p>First Name:</p>
+                First Name:
             </div>
             <div>
                 @Html.EditorFor(model => model.FirstName)
                 @Html.ValidationMessageFor(model => model.FirstName)
             </div>
             <div>
-                <p>Last Name:</p>
+                Last Name:
             </div>
             <div>
                 @Html.EditorFor(model => model.LastName)
                 @Html.ValidationMessageFor(model => model.LastName)
             </div>
             <div>
-                <p>Birth Date:</p>
+                Birth Date:
             </div>
             <div>
                 @Html.EditorFor(model => model.BirthDate)
                 @Html.ValidationMessageFor(model => model.BirthDate)
             </div>
             <div>
-                <p>Awards:</p>
+                Awards:
             </div>
             <div>
-                @if (Model.AwardsCheckBox.Count != 0)
+                @foreach (var item in @ViewBag.Awards)
                 {
-                    for (int i = 0; i < Model.AwardsCheckBox.Count; i++)
+                    if (Model!= null && Model.Awards.Contains(item))
                     {
-                        <p>
-                            @Html.EditorFor(Model => Model.AwardsCheckBox[i].IsChecked)
-                            @Model.AwardsCheckBox[i].Title
-
-                        </p>
-                        @Html.HiddenFor(model => Model.AwardsCheckBox[i].id)
-                        <br />
+                        <input type="checkbox" name="Awards" checked="checked" value=@item.id> @item.Title<Br>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="Awards" value=@item.id> @item.Title<Br>
                     }
 
                 }

@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using BLL.Logic;
 using Entities;
-using Web.UsersAndAwards.Models;
 
 namespace Web.UsersAndAwards.Controllers
 {
@@ -33,30 +32,36 @@ namespace Web.UsersAndAwards.Controllers
         }
 
 
-
+        
         // GET: Users/Create
         public ActionResult Add()
         {
             ViewBag.Awards = awardsList;
 
-            UserEditViewModel model = new UserEditViewModel(new User(), awardsList) ;
-            return View(model);
+            User user = new User();
+            return View(user);
         }
 
 
         // POST: Users/Create
         [HttpPost]
-        public ActionResult Add(UserEditViewModel model)
+        public ActionResult Add(FormCollection collection)
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
+
+            User newUser = new User(collection["FirstName"], collection["LastName"], DateTime.Parse(collection["BirthDate"]));
+            if (collection["Awards"] != null)
+            {
+                string[] awardsId = collection["Awards"].Split(',');
+                foreach (var item in awardsId)
+                {
+                    Award award = Logic.GetAwardById(Convert.ToInt32(item));
+                    newUser.Awards.Add(award);
+                }
+            }
             
-            List<Award> newAwards = new List<Award>();
-
-            var checkedAwards = model.AwardsCheckBox.Where(a => a.IsChecked).ToList();
-            newAwards = checkedAwards.Select(a => Logic.GetAwardById(a.id)).ToList();
-
-            Logic.AddUser(model.FirstName, model.LastName, DateTime.Parse(model.BirthDate), newAwards);
+            Logic.AddUser(newUser);
 
             return RedirectToAction("Index");
         }
@@ -67,26 +72,35 @@ namespace Web.UsersAndAwards.Controllers
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
+            ViewBag.Awards = awardsList;
 
-            UserEditViewModel model = new UserEditViewModel(Logic.GetUserById(id), awardsList);
-            return View(model);
+            User user = Logic.GetUserById(id);
+            return View(user);
         }
 
 
         // POST: Users/Edit/5
         [HttpPost]
-        public ActionResult Edit(UserEditViewModel model)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             awardsList = Logic.GetAllAwards();
             usersList = Logic.GetAllUsers();
 
-            User user = Logic.GetUserById(model.id);
+            User user = Logic.GetUserById(id);
             List<Award> newAwards = new List<Award>();
+            
+            if (collection["Awards"] != null)
+            {
+                string[] awardsId = collection["Awards"].Split(',');
 
-            var checkedAwards = model.AwardsCheckBox.Where(a => a.IsChecked).ToList();
-            newAwards = checkedAwards.Select(a => Logic.GetAwardById(a.id)).ToList();
+                foreach (var item in awardsId)
+                {
+                    Award award = Logic.GetAwardById(Convert.ToInt32(item));
+                    newAwards.Add(award);
+                }
+            } 
 
-            Logic.UpdateUser(user, model.FirstName, model.LastName, DateTime.Parse(model.BirthDate), newAwards);
+            Logic.UpdateUser(user, collection["FirstName"], collection["LastName"], DateTime.Parse(collection["BirthDate"]), newAwards);
 
             return RedirectToAction("Index");
         }

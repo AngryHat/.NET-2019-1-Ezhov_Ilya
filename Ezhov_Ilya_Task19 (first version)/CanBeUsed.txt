@@ -1,0 +1,1 @@
+[StringLength(50, MinimumLength = 3, ErrorMessage = "Name can't be emprty or conatin more than 50 chars.")]
